@@ -7,15 +7,118 @@
   <link rel="stylesheet" href="css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- QR Code generator library -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
   <script>tailwind.config={theme:{extend:{colors:{primary:'#e63946',secondary:'#1d3557',accent:'#457b9d',light:'#a8dadc',cream:'#f1faee'},fontFamily:{poppins:['Poppins','sans-serif']}}}}</script>
+
+  <style>
+    /* ── Payment Modal ── */
+    #paymentModal {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s ease;
+    }
+    #paymentModal.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    #paymentModalBox {
+      transform: scale(.92) translateY(20px);
+      transition: transform .35s ease, opacity .35s ease;
+      opacity: 0;
+    }
+    #paymentModal.open #paymentModalBox {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+
+    /* ── Payment method tabs ── */
+    .pay-tab {
+      flex: 1;
+      padding: .65rem 1rem;
+      border-radius: .75rem;
+      font-weight: 600;
+      font-size: .85rem;
+      cursor: pointer;
+      border: 2px solid #e5e7eb;
+      background: #fff;
+      color: #6b7280;
+      transition: all .2s;
+      text-align: center;
+    }
+    .pay-tab.active-esewa  { background: #5f9c3b; border-color: #5f9c3b; color: #fff; }
+    .pay-tab.active-khalti { background: #5c2d91; border-color: #5c2d91; color: #fff; }
+
+    /* eSewa button */
+    .btn-esewa {
+      display: flex; align-items: center; justify-content: center; gap: .6rem;
+      width: 100%; padding: .9rem 1.5rem;
+      background: linear-gradient(135deg, #5f9c3b, #3e7a22);
+      color: #fff; font-weight: 700; font-size: 1rem;
+      border-radius: 9999px;
+      border: none; cursor: pointer;
+      box-shadow: 0 4px 18px rgba(95,156,59,.4);
+      transition: transform .25s, box-shadow .25s, filter .25s;
+    }
+    .btn-esewa:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(95,156,59,.5); filter: brightness(1.07); }
+
+    /* Khalti button */
+    .btn-khalti {
+      display: flex; align-items: center; justify-content: center; gap: .6rem;
+      width: 100%; padding: .9rem 1.5rem;
+      background: linear-gradient(135deg, #5c2d91, #3b1a63);
+      color: #fff; font-weight: 700; font-size: 1rem;
+      border-radius: 9999px;
+      border: none; cursor: pointer;
+      box-shadow: 0 4px 18px rgba(92,45,145,.4);
+      transition: transform .25s, box-shadow .25s, filter .25s;
+    }
+    .btn-khalti:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(92,45,145,.5); filter: brightness(1.07); }
+
+    /* QR pulse ring */
+    .qr-ring {
+      position: absolute; inset: -8px;
+      border: 3px solid rgba(230,57,70,.3);
+      border-radius: 1rem;
+      animation: qrPulse 2s ease-in-out infinite;
+    }
+    @keyframes qrPulse {
+      0%,100% { opacity: .3; transform: scale(1); }
+      50%      { opacity: .7; transform: scale(1.03); }
+    }
+
+    /* Divider */
+    .or-divider {
+      display: flex; align-items: center; gap: .75rem;
+      color: #9ca3af; font-size: .8rem; font-weight: 500;
+    }
+    .or-divider::before, .or-divider::after {
+      content: ''; flex: 1; height: 1px; background: #e5e7eb;
+    }
+
+    /* Step indicator */
+    .step-dot {
+      width: .6rem; height: .6rem; border-radius: 50%;
+      background: #e5e7eb; transition: background .3s;
+    }
+    .step-dot.active { background: #e63946; }
+  </style>
 </head>
 <body class="font-poppins bg-white text-gray-800 overflow-x-hidden">
 
-  <!-- NAVBAR -->
+  <!-- ══════════════════ NAVBAR ══════════════════ -->
   <nav id="navbar" class="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16 lg:h-20">
-        <a href="index.html" class="flex items-center gap-3 group"><div class="w-10 h-10 lg:w-12 lg:h-12 flex items-center justify-center group-hover:scale-110 transition-transform"><img class="logo-img w-full h-full object-contain" src="./image/logo.png" alt="logo" /></div><div class="leading-tight"><span class="block text-base lg:text-lg font-bold text-secondary">Hearts United</span><span class="block text-xs text-primary font-medium tracking-wide">Nepal Org</span></div></a>
+        <a href="index.html" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 lg:w-12 lg:h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+            <img class="logo-img w-full h-full object-contain" src="./image/logo.png" alt="logo" />
+          </div>
+          <div class="leading-tight">
+            <span class="block text-base lg:text-lg font-bold text-secondary">Hearts United</span>
+            <span class="block text-xs text-primary font-medium tracking-wide">Nepal Org</span>
+          </div>
+        </a>
         <ul class="hidden lg:flex items-center gap-1">
           <li><a href="index.html"     class="nav-link">Home</a></li>
           <li><a href="about.html"     class="nav-link">About Us</a></li>
@@ -25,14 +128,26 @@
           <li><a href="volunteer.html" class="nav-link">Volunteer</a></li>
           <li><a href="contact.html"   class="nav-link">Contact</a></li>
         </ul>
-        <a href="donate.html" class="hidden lg:flex items-center gap-2 bg-primary hover:bg-red-700 text-white font-semibold px-5 py-2.5 rounded-full transition-all shadow-md hover:-translate-y-0.5 text-sm"><i class="fa-solid fa-heart-pulse"></i> Donate Now</a>
-        <button id="menuBtn" class="lg:hidden flex flex-col gap-1.5 p-2 rounded-lg hover:bg-gray-100 transition-colors"><span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span></button>
+        <a href="donate.html" class="hidden lg:flex items-center gap-2 bg-primary hover:bg-red-700 text-white font-semibold px-5 py-2.5 rounded-full transition-all shadow-md hover:-translate-y-0.5 text-sm">
+          <i class="fa-solid fa-heart-pulse"></i> Donate Now
+        </a>
+        <button id="menuBtn" class="lg:hidden flex flex-col gap-1.5 p-2 rounded-lg hover:bg-gray-100 transition-colors">
+          <span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span>
+        </button>
       </div>
     </div>
   </nav>
+
+  <!-- Canvas Overlay & Sidebar -->
   <div id="canvasOverlay" class="fixed inset-0 bg-black/50 z-40 opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden"></div>
   <aside id="mobileCanvas" class="fixed top-0 right-0 h-full w-72 sm:w-80 bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden flex flex-col">
-    <div class="flex items-center justify-between p-5 border-b bg-gradient-to-r from-secondary to-accent"><div class="flex items-center gap-3"><div class="w-10 h-10 flex items-center justify-center"><img class="canvas-logo-img w-full h-full object-contain" src="./image/logo.png" alt="logo" /></div><div><span class="block text-sm font-bold text-white">Hearts United</span><span class="block text-xs text-light">Nepal Org</span></div></div><button id="closeCanvas" class="w-9 h-9 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 text-white transition-colors"><i class="fa-solid fa-xmark text-lg"></i></button></div>
+    <div class="flex items-center justify-between p-5 border-b bg-gradient-to-r from-secondary to-accent">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 flex items-center justify-center"><img class="canvas-logo-img w-full h-full object-contain" src="./image/logo.png" alt="logo" /></div>
+        <div><span class="block text-sm font-bold text-white">Hearts United</span><span class="block text-xs text-light">Nepal Org</span></div>
+      </div>
+      <button id="closeCanvas" class="w-9 h-9 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 text-white transition-colors"><i class="fa-solid fa-xmark text-lg"></i></button>
+    </div>
     <nav class="flex-1 overflow-y-auto py-4 px-4"><ul class="space-y-1">
       <li><a href="index.html"     class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-house w-5"></i> Home</a></li>
       <li><a href="about.html"     class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-circle-info w-5"></i> About Us</a></li>
@@ -42,10 +157,19 @@
       <li><a href="volunteer.html" class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-hand-holding-heart w-5"></i> Volunteer</a></li>
       <li><a href="contact.html"   class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-envelope w-5"></i> Contact</a></li>
     </ul></nav>
-    <div class="p-4 border-t"><a href="donate.html" onclick="closeCanvas()" class="flex items-center justify-center gap-2 w-full bg-primary hover:bg-red-700 text-white font-semibold py-3 rounded-full transition-all"><i class="fa-solid fa-heart-pulse"></i> Donate Now</a><div class="flex justify-center gap-3 mt-4"><a href="#" class="w-9 h-9 rounded-full bg-gray-100 hover:bg-blue-600 hover:text-white flex items-center justify-center text-gray-500 transition-all"><i class="fab fa-facebook-f text-sm"></i></a><a href="#" class="w-9 h-9 rounded-full bg-gray-100 hover:bg-pink-600 hover:text-white flex items-center justify-center text-gray-500 transition-all"><i class="fab fa-instagram text-sm"></i></a><a href="#" class="w-9 h-9 rounded-full bg-gray-100 hover:bg-red-600 hover:text-white flex items-center justify-center text-gray-500 transition-all"><i class="fab fa-youtube text-sm"></i></a></div></div>
+    <div class="p-4 border-t">
+      <a href="donate.html" onclick="closeCanvas()" class="flex items-center justify-center gap-2 w-full bg-primary hover:bg-red-700 text-white font-semibold py-3 rounded-full transition-all">
+        <i class="fa-solid fa-heart-pulse"></i> Donate Now
+      </a>
+      <div class="flex justify-center gap-3 mt-4">
+        <a href="#" class="w-9 h-9 rounded-full bg-gray-100 hover:bg-blue-600 hover:text-white flex items-center justify-center text-gray-500 transition-all"><i class="fab fa-facebook-f text-sm"></i></a>
+        <a href="#" class="w-9 h-9 rounded-full bg-gray-100 hover:bg-pink-600 hover:text-white flex items-center justify-center text-gray-500 transition-all"><i class="fab fa-instagram text-sm"></i></a>
+        <a href="#" class="w-9 h-9 rounded-full bg-gray-100 hover:bg-red-600 hover:text-white flex items-center justify-center text-gray-500 transition-all"><i class="fab fa-youtube text-sm"></i></a>
+      </div>
+    </div>
   </aside>
 
-  <!-- PAGE HERO -->
+  <!-- ══════════════════ PAGE HERO ══════════════════ -->
   <div class="page-hero">
     <div class="page-hero-bg hero-donate-bg"></div>
     <div class="page-hero-overlay"></div>
@@ -57,23 +181,24 @@
     </div>
   </div>
 
-  <!-- IMPACT NUMBERS -->
+  <!-- ══════════════════ IMPACT STRIP ══════════════════ -->
   <section class="py-12 bg-primary">
     <div class="max-w-5xl mx-auto px-4">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-white">
-        <div><p class="text-3xl font-extrabold">Rs 500</p><p class="text-white/80 text-sm mt-1">Feeds a family for 1 week</p></div>
-        <div><p class="text-3xl font-extrabold">Rs 1,000</p><p class="text-white/80 text-sm mt-1">Provides school kit for 1 child</p></div>
-        <div><p class="text-3xl font-extrabold">Rs 5,000</p><p class="text-white/80 text-sm mt-1">Covers 1 patient's medicine cost</p></div>
-        <div><p class="text-3xl font-extrabold">Rs 10,000</p><p class="text-white/80 text-sm mt-1">Sponsors 1 child's education</p></div>
+        <div><p class="text-2xl sm:text-3xl font-extrabold">Rs 500</p><p class="text-white/80 text-xs sm:text-sm mt-1">Feeds a family for 1 week</p></div>
+        <div><p class="text-2xl sm:text-3xl font-extrabold">Rs 1,000</p><p class="text-white/80 text-xs sm:text-sm mt-1">Provides school kit for 1 child</p></div>
+        <div><p class="text-2xl sm:text-3xl font-extrabold">Rs 5,000</p><p class="text-white/80 text-xs sm:text-sm mt-1">Covers 1 patient's medicine cost</p></div>
+        <div><p class="text-2xl sm:text-3xl font-extrabold">Rs 10,000</p><p class="text-white/80 text-xs sm:text-sm mt-1">Sponsors 1 child's education</p></div>
       </div>
     </div>
   </section>
 
-  <!-- DONATION FORM -->
+  <!-- ══════════════════ DONATION FORM ══════════════════ -->
   <section class="py-20 bg-cream">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-5 gap-10">
-        <!-- Info -->
+
+        <!-- Left info panel -->
         <div class="lg:col-span-2 space-y-6">
           <div>
             <span class="section-badge">Why Donate</span>
@@ -98,13 +223,32 @@
               <div><p class="font-semibold text-secondary text-sm">Direct Impact</p><p class="text-xs text-gray-400">Funds go directly to programs</p></div>
             </div>
           </div>
+
+          <!-- Accepted payments badge -->
+          <div class="bg-white rounded-2xl p-4 shadow-sm">
+            <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Accepted Payments</p>
+            <div class="flex items-center gap-3">
+              <div class="flex items-center gap-1.5 bg-green-50 border border-green-200 rounded-lg px-3 py-2">
+                <span class="text-green-700 font-bold text-sm">e</span>
+                <span class="text-green-700 font-bold text-sm">Sewa</span>
+              </div>
+              <div class="flex items-center gap-1.5 bg-purple-50 border border-purple-200 rounded-lg px-3 py-2">
+                <span class="text-purple-700 font-bold text-sm">Khalti</span>
+              </div>
+              <div class="flex items-center gap-1.5 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2">
+                <i class="fa-solid fa-qrcode text-gray-500 text-sm"></i>
+                <span class="text-gray-600 font-bold text-sm">QR</span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- Form -->
+        <!-- Right donation card -->
         <div class="lg:col-span-3 bg-white rounded-3xl p-8 shadow-xl">
           <h3 class="text-2xl font-bold text-secondary mb-2">Complete Your Donation</h3>
-          <p class="text-gray-500 text-sm mb-6">Select an amount or enter a custom amount below.</p>
+          <p class="text-gray-500 text-sm mb-6">Select an amount, fill in your details, then choose your payment method.</p>
 
+          <!-- Amount selector -->
           <div class="mb-5">
             <p class="form-label mb-3">Choose Amount (NPR)</p>
             <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-3">
@@ -116,38 +260,46 @@
               <button class="donate-amt" data-amount="custom">Custom</button>
             </div>
             <div id="customAmtWrap" class="hidden">
-              <input type="number" id="customAmt" placeholder="Enter amount (NPR)" class="form-input" />
+              <input type="number" id="customAmt" placeholder="Enter amount (NPR)" class="form-input" min="1" />
             </div>
           </div>
 
+          <!-- Donor info form -->
           <form id="donateForm" class="space-y-4">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div><label class="form-label">Your Name *</label><input type="text" class="form-input" placeholder="Ramesh Sharma" required /></div>
-              <div><label class="form-label">Email Address *</label><input type="email" class="form-input" placeholder="you@example.com" required /></div>
+              <div><label class="form-label">Your Name *</label><input type="text" id="donorName" class="form-input" placeholder="Ramesh Sharma" required /></div>
+              <div><label class="form-label">Email Address *</label><input type="email" id="donorEmail" class="form-input" placeholder="you@example.com" required /></div>
             </div>
-            <div><label class="form-label">Phone (Optional)</label><input type="tel" class="form-input" placeholder="+977-98XXXXXXXX" /></div>
+            <div><label class="form-label">Phone (Optional)</label><input type="tel" id="donorPhone" class="form-input" placeholder="+977-98XXXXXXXX" /></div>
             <div><label class="form-label">Donate For (Optional)</label>
-              <select class="form-input">
-                <option value="">General Fund</option>
-                <option>Education Support</option>
-                <option>Medical Camps</option>
-                <option>Food & Nutrition</option>
-                <option>Disaster Relief</option>
-                <option>Women Empowerment</option>
+              <select id="donorPurpose" class="form-input">
+                <option value="General Fund">General Fund</option>
+                <option value="Education Support">Education Support</option>
+                <option value="Medical Camps">Medical Camps</option>
+                <option value="Food & Nutrition">Food &amp; Nutrition</option>
+                <option value="Disaster Relief">Disaster Relief</option>
+                <option value="Women Empowerment">Women Empowerment</option>
               </select>
             </div>
-            <div><label class="form-label">Message (Optional)</label><input type="text" class="form-input" placeholder="A note for the team..." /></div>
-            <button type="submit" class="w-full bg-primary hover:bg-red-700 text-white font-bold py-4 rounded-full transition-all shadow-md hover:shadow-lg text-lg flex items-center justify-center gap-2">
-              <i class="fa-solid fa-heart animate-pulse"></i> Donate Now
+            <div><label class="form-label">Message (Optional)</label><input type="text" id="donorMsg" class="form-input" placeholder="A note for the team..." /></div>
+
+            <!-- ★ PROCEED TO PAYMENT button ★ -->
+            <button type="submit" id="proceedBtn"
+              class="w-full bg-primary hover:bg-red-700 text-white font-bold py-4 rounded-full transition-all shadow-md hover:shadow-lg text-lg flex items-center justify-center gap-2 group">
+              <i class="fa-solid fa-heart-pulse group-hover:animate-pulse"></i>
+              Proceed to Payment
+              <i class="fa-solid fa-arrow-right text-sm"></i>
             </button>
-            <p class="text-center text-xs text-gray-400"><i class="fa-solid fa-shield-halved mr-1"></i> Your donation is safe, secure, and directly impactful</p>
+            <p class="text-center text-xs text-gray-400">
+              <i class="fa-solid fa-shield-halved mr-1"></i> Safe &amp; secure — powered by eSewa &amp; Khalti
+            </p>
           </form>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- OTHER WAYS TO HELP -->
+  <!-- ══════════════════ OTHER WAYS ══════════════════ -->
   <section class="py-16 bg-white">
     <div class="max-w-5xl mx-auto px-4 text-center">
       <span class="section-badge">Other Ways</span>
@@ -179,19 +331,338 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- ══════════════════ FOOTER ══════════════════ -->
   <footer class="bg-secondary text-white pt-16 pb-6">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-        <div><div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 flex items-center justify-center"><img class="logo-img w-full h-full object-contain" src="./image/logo.png" alt="logo" /></div><div><span class="block font-bold">Hearts United</span><span class="block text-xs text-light">Nepal Org</span></div></div><p class="text-white/60 text-sm leading-relaxed mb-5">Dedicated to creating a compassionate Nepal through community-driven programs.</p><div class="flex gap-3"><a href="#" class="social-btn bg-blue-600"><i class="fab fa-facebook-f text-sm"></i></a><a href="#" class="social-btn bg-pink-600"><i class="fab fa-instagram text-sm"></i></a><a href="#" class="social-btn bg-red-600"><i class="fab fa-youtube text-sm"></i></a><a href="#" class="social-btn bg-green-600"><i class="fab fa-whatsapp text-sm"></i></a></div></div>
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 flex items-center justify-center"><img class="logo-img w-full h-full object-contain" src="./image/logo.png" alt="logo" /></div>
+            <div><span class="block font-bold">Hearts United</span><span class="block text-xs text-light">Nepal Org</span></div>
+          </div>
+          <p class="text-white/60 text-sm leading-relaxed mb-5">Dedicated to creating a compassionate Nepal through community-driven programs.</p>
+          <div class="flex gap-3">
+            <a href="#" class="social-btn bg-blue-600"><i class="fab fa-facebook-f text-sm"></i></a>
+            <a href="#" class="social-btn bg-pink-600"><i class="fab fa-instagram text-sm"></i></a>
+            <a href="#" class="social-btn bg-red-600"><i class="fab fa-youtube text-sm"></i></a>
+            <a href="#" class="social-btn bg-green-600"><i class="fab fa-whatsapp text-sm"></i></a>
+          </div>
+        </div>
         <div><h4 class="font-bold text-lg mb-4 text-light">Quick Links</h4><ul class="space-y-2"><li><a href="index.html" class="footer-link">Home</a></li><li><a href="about.html" class="footer-link">About Us</a></li><li><a href="programs.html" class="footer-link">Programs</a></li><li><a href="gallery.html" class="footer-link">Gallery</a></li><li><a href="volunteer.html" class="footer-link">Volunteer</a></li><li><a href="donate.html" class="footer-link">Donate</a></li></ul></div>
         <div><h4 class="font-bold text-lg mb-4 text-light">Our Programs</h4><ul class="space-y-2"><li><a href="programs.html" class="footer-link">Education Support</a></li><li><a href="programs.html" class="footer-link">Medical Camps</a></li><li><a href="programs.html" class="footer-link">Food & Nutrition</a></li><li><a href="programs.html" class="footer-link">Disaster Relief</a></li><li><a href="programs.html" class="footer-link">Women Empowerment</a></li></ul></div>
-        <div><h4 class="font-bold text-lg mb-4 text-light">Newsletter</h4><p class="text-white/60 text-sm mb-4">Stay updated with our latest news.</p><form id="newsletterForm" class="flex gap-2"><input type="email" placeholder="Your email" class="flex-1 px-4 py-2.5 rounded-full bg-white/10 border border-white/20 text-white placeholder-white/40 text-sm focus:outline-none focus:border-primary" required /><button type="submit" class="bg-primary hover:bg-red-700 text-white px-4 py-2.5 rounded-full text-sm transition-colors"><i class="fa-solid fa-paper-plane"></i></button></form><div class="mt-6 space-y-2 text-sm text-white/60"><p><i class="fa-solid fa-location-dot text-primary mr-2"></i>Harinagar-7 Ghuski sunsari</p><p><i class="fa-solid fa-phone text-primary mr-2"></i>+977 9819341743</p><p><i class="fa-solid fa-envelope text-primary mr-2"></i>heartsunitednepalorg@gmail.com</p></div></div>
+        <div>
+          <h4 class="font-bold text-lg mb-4 text-light">Newsletter</h4>
+          <p class="text-white/60 text-sm mb-4">Stay updated with our latest news.</p>
+          <form id="newsletterForm" class="flex gap-2">
+            <input type="email" placeholder="Your email" class="flex-1 px-4 py-2.5 rounded-full bg-white/10 border border-white/20 text-white placeholder-white/40 text-sm focus:outline-none focus:border-primary" required />
+            <button type="submit" class="bg-primary hover:bg-red-700 text-white px-4 py-2.5 rounded-full text-sm transition-colors"><i class="fa-solid fa-paper-plane"></i></button>
+          </form>
+          <div class="mt-6 space-y-2 text-sm text-white/60">
+            <p><i class="fa-solid fa-location-dot text-primary mr-2"></i>Harinagar-7 Ghuski Sunsari</p>
+            <p><i class="fa-solid fa-phone text-primary mr-2"></i>+977 9819341743</p>
+            <p><i class="fa-solid fa-envelope text-primary mr-2"></i>heartsunitednepalorg@gmail.com</p>
+          </div>
+        </div>
       </div>
-      <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-sm text-white/50"><p>&copy; 2025 Hearts United Nepal Org. All rights reserved.</p><p>Made with <i class="fa-solid fa-heart text-primary mx-1"></i> for Nepal</p></div>
+      <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-sm text-white/50">
+        <p>&copy; 2025 Hearts United Nepal Org. All rights reserved.</p>
+        <p>Made with <i class="fa-solid fa-heart text-primary mx-1"></i> for Nepal</p>
+      </div>
     </div>
   </footer>
+
   <button id="scrollTop" class="fixed bottom-6 right-6 w-12 h-12 bg-primary text-white rounded-full shadow-xl flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 hover:bg-red-700 hover:scale-110 z-40"><i class="fa-solid fa-chevron-up"></i></button>
+
+  <!-- ══════════════════════════════════════════════════
+       PAYMENT MODAL
+  ══════════════════════════════════════════════════ -->
+  <div id="paymentModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+    <div id="paymentModalBox" class="bg-white rounded-3xl shadow-2xl w-full max-w-3xl max-h-[92vh] overflow-y-auto">
+
+      <!-- Modal header -->
+      <div class="flex items-center justify-between p-5 sm:p-6 border-b border-gray-100">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-secondary">Complete Payment</h2>
+          <p class="text-sm text-gray-400 mt-0.5">Choose your preferred payment method</p>
+        </div>
+        <button id="closeModal" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-red-100 hover:text-primary flex items-center justify-center transition-colors">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Amount summary bar -->
+      <div class="mx-5 sm:mx-6 mt-5 bg-gradient-to-r from-primary to-red-600 rounded-2xl p-4 flex items-center justify-between text-white">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+            <i class="fa-solid fa-heart-pulse text-lg"></i>
+          </div>
+          <div>
+            <p class="text-xs text-white/70 font-medium">Donation Amount</p>
+            <p id="modalAmount" class="text-2xl font-extrabold">Rs 500</p>
+          </div>
+        </div>
+        <div class="text-right hidden sm:block">
+          <p class="text-xs text-white/70">For</p>
+          <p id="modalPurpose" class="text-sm font-semibold">General Fund</p>
+        </div>
+      </div>
+
+      <!-- Two-column layout -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 p-5 sm:p-6">
+
+        <!-- LEFT: QR Code -->
+        <div class="flex flex-col items-center">
+          <p class="text-sm font-bold text-secondary mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-qrcode text-primary"></i> Scan QR to Pay
+          </p>
+          <div class="relative inline-block">
+            <div class="qr-ring"></div>
+            <div class="bg-white border-2 border-gray-100 rounded-2xl p-4 shadow-lg">
+              <canvas id="qrCanvas"></canvas>
+            </div>
+          </div>
+          <p class="text-xs text-gray-400 mt-3 text-center">Scan with any UPI / QR payment app</p>
+          <!-- QR amount label -->
+          <div class="mt-3 bg-gray-50 rounded-xl px-4 py-2 text-center">
+            <p class="text-xs text-gray-400">Amount to pay</p>
+            <p id="qrAmtLabel" class="text-xl font-extrabold text-secondary">Rs 500</p>
+          </div>
+          <!-- Download QR button -->
+          <button id="downloadQR" class="mt-3 text-xs text-primary hover:text-red-700 flex items-center gap-1.5 font-semibold transition-colors">
+            <i class="fa-solid fa-download"></i> Download QR
+          </button>
+        </div>
+
+        <!-- RIGHT: eSewa & Khalti -->
+        <div class="flex flex-col justify-center">
+          <p class="text-sm font-bold text-secondary mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-mobile-screen-button text-primary"></i> Pay via App
+          </p>
+
+          <!-- eSewa -->
+          <div class="bg-green-50 border border-green-100 rounded-2xl p-5 mb-4">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 bg-green-600 rounded-xl flex items-center justify-center">
+                <span class="text-white font-extrabold text-lg">e</span>
+              </div>
+              <div>
+                <p class="font-bold text-green-800">eSewa</p>
+                <p class="text-xs text-green-600">Nepal's most trusted digital wallet</p>
+              </div>
+            </div>
+            <p class="text-xs text-gray-500 mb-3">
+              eSewa ID: <span class="font-bold text-green-700 select-all" id="esewaId">9819341743</span>
+              <button onclick="copyText('9819341743','esewa')" class="ml-2 text-green-600 hover:text-green-800 transition-colors" title="Copy">
+                <i class="fa-regular fa-copy text-xs"></i>
+              </button>
+            </p>
+            <button onclick="openESewa()" class="btn-esewa">
+              <span class="text-xl font-black">e</span>
+              Pay with eSewa &nbsp;<span id="esewaAmtBtn" class="opacity-80 font-normal text-sm"></span>
+            </button>
+          </div>
+
+          <!-- Khalti -->
+          <div class="bg-purple-50 border border-purple-100 rounded-2xl p-5">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 bg-purple-700 rounded-xl flex items-center justify-center">
+                <i class="fa-solid fa-k text-white font-extrabold"></i>
+              </div>
+              <div>
+                <p class="font-bold text-purple-800">Khalti</p>
+                <p class="text-xs text-purple-600">Fast &amp; easy digital payments</p>
+              </div>
+            </div>
+            <p class="text-xs text-gray-500 mb-3">
+              Khalti ID: <span class="font-bold text-purple-700 select-all" id="khaltiId">9819341743</span>
+              <button onclick="copyText('9819341743','khalti')" class="ml-2 text-purple-600 hover:text-purple-800 transition-colors" title="Copy">
+                <i class="fa-regular fa-copy text-xs"></i>
+              </button>
+            </p>
+            <button onclick="openKhalti()" class="btn-khalti">
+              <i class="fa-solid fa-bolt"></i>
+              Pay with Khalti &nbsp;<span id="khaltiAmtBtn" class="opacity-80 font-normal text-sm"></span>
+            </button>
+          </div>
+
+          <!-- Divider -->
+          <div class="or-divider my-4">or pay manually by sending to the IDs above</div>
+
+          <!-- Steps guide -->
+          <div class="bg-gray-50 rounded-xl p-4 text-xs text-gray-500 space-y-1.5">
+            <p class="font-semibold text-gray-600 mb-2">How to pay:</p>
+            <p><span class="inline-flex w-5 h-5 bg-primary text-white rounded-full items-center justify-center font-bold mr-1.5">1</span>Open eSewa or Khalti app</p>
+            <p><span class="inline-flex w-5 h-5 bg-primary text-white rounded-full items-center justify-center font-bold mr-1.5">2</span>Send money to the ID above</p>
+            <p><span class="inline-flex w-5 h-5 bg-primary text-white rounded-full items-center justify-center font-bold mr-1.5">3</span>Take a screenshot &amp; send to us</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="px-5 sm:px-6 pb-5 sm:pb-6 flex flex-col sm:flex-row gap-3 items-center justify-between border-t border-gray-100 pt-4">
+        <p class="text-xs text-gray-400 flex items-center gap-1.5">
+          <i class="fa-solid fa-shield-halved text-green-500"></i>
+          Secure payment — Hearts United Nepal Org
+        </p>
+        <button id="doneBtn" class="bg-secondary hover:bg-accent text-white font-semibold px-6 py-2.5 rounded-full text-sm transition-all flex items-center gap-2">
+          <i class="fa-solid fa-check"></i> I've Completed Payment
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ SCRIPTS ══════════════════ -->
   <script src="js/main.js"></script>
+  <script>
+  'use strict';
+
+  /* ── Config — replace with your actual eSewa/Khalti merchant details ── */
+  const ORG_ESEWA_ID  = '9819341743';   // eSewa registered phone / merchant ID
+  const ORG_KHALTI_ID = '9819341743';   // Khalti registered phone / merchant ID
+  const ORG_NAME      = 'Hearts United Nepal Org';
+
+  /* ── State ── */
+  let selectedAmount = 500;
+
+  /* ── Helpers ── */
+  function getAmount() {
+    const custom = document.getElementById('customAmt');
+    const active = document.querySelector('.donate-amt.active');
+    if (active && active.dataset.amount === 'custom') {
+      return parseInt(custom?.value) || 0;
+    }
+    return parseInt(active?.dataset.amount) || 500;
+  }
+
+  function formatNPR(n) {
+    return 'Rs ' + Number(n).toLocaleString('en-NP');
+  }
+
+  /* ── Amount selector (extends main.js) ── */
+  document.querySelectorAll('.donate-amt').forEach(btn => {
+    btn.addEventListener('click', () => {
+      selectedAmount = getAmount();
+    });
+  });
+  document.getElementById('customAmt')?.addEventListener('input', () => {
+    selectedAmount = getAmount();
+  });
+
+  /* ── Generate QR ── */
+  function generateQR(amount) {
+    const canvas = document.getElementById('qrCanvas');
+    if (!canvas) return;
+    // QR data: plain text payment info (works with all QR scanners)
+    const qrData = `Pay NPR ${amount} to ${ORG_NAME}\neSewa: ${ORG_ESEWA_ID}\nKhalti: ${ORG_KHALTI_ID}`;
+    QRCode.toCanvas(canvas, qrData, {
+      width: 180,
+      margin: 2,
+      color: { dark: '#1d3557', light: '#ffffff' }
+    }, err => { if (err) console.error(err); });
+  }
+
+  /* ── Download QR ── */
+  document.getElementById('downloadQR')?.addEventListener('click', () => {
+    const canvas = document.getElementById('qrCanvas');
+    if (!canvas) return;
+    const link = document.createElement('a');
+    link.download = `hearts-united-qr-${selectedAmount}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+
+  /* ── Open payment modal ── */
+  function openPaymentModal(amount, purpose) {
+    selectedAmount = amount;
+    const amtStr   = formatNPR(amount);
+
+    // Update modal UI
+    document.getElementById('modalAmount').textContent  = amtStr;
+    document.getElementById('modalPurpose').textContent = purpose || 'General Fund';
+    document.getElementById('qrAmtLabel').textContent   = amtStr;
+    document.getElementById('esewaAmtBtn').textContent  = `(${amtStr})`;
+    document.getElementById('khaltiAmtBtn').textContent = `(${amtStr})`;
+
+    // Generate QR
+    generateQR(amount);
+
+    // Show modal
+    const modal = document.getElementById('paymentModal');
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  /* ── Close modal ── */
+  function closePaymentModal() {
+    document.getElementById('paymentModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('closeModal')?.addEventListener('click', closePaymentModal);
+  document.getElementById('doneBtn')?.addEventListener('click', () => {
+    closePaymentModal();
+    showToast('✓ Thank you for your generous donation! ❤️');
+  });
+  document.getElementById('paymentModal')?.addEventListener('click', e => {
+    if (e.target === document.getElementById('paymentModal')) closePaymentModal();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closePaymentModal();
+  });
+
+  /* ── Form submit → open modal ── */
+  document.getElementById('donateForm')?.addEventListener('submit', e => {
+    e.preventDefault();
+    const amt     = getAmount();
+    const purpose = document.getElementById('donorPurpose')?.value || 'General Fund';
+    if (!amt || amt < 1) {
+      showToast('Please enter a valid amount.', 'error');
+      return;
+    }
+    openPaymentModal(amt, purpose);
+  });
+
+  /* ── eSewa redirect ── */
+  function openESewa() {
+    const amt = selectedAmount;
+    // eSewa personal send money deep-link
+    // For real merchant integration, use eSewa payment gateway API
+    const url = `https://esewa.com.np/#/pay?pa=${ORG_ESEWA_ID}&pn=${encodeURIComponent(ORG_NAME)}&am=${amt}&pid=donation-${Date.now()}`;
+    window.open(url, '_blank', 'noopener');
+  }
+
+  /* ── Khalti redirect ── */
+  function openKhalti() {
+    const amt = selectedAmount;
+    // Khalti personal send money deep-link
+    // For real merchant integration, use Khalti Payment Gateway API
+    const url = `https://khalti.com/pay/?mobile=${ORG_KHALTI_ID}&amount=${amt * 100}&name=${encodeURIComponent(ORG_NAME)}`;
+    window.open(url, '_blank', 'noopener');
+  }
+
+  /* ── Copy ID helper ── */
+  function copyText(text, type) {
+    navigator.clipboard.writeText(text).then(() => {
+      showToast(`✓ ${type === 'esewa' ? 'eSewa' : 'Khalti'} ID copied!`);
+    }).catch(() => {
+      // fallback
+      const el = document.createElement('textarea');
+      el.value = text; document.body.appendChild(el);
+      el.select(); document.execCommand('copy');
+      document.body.removeChild(el);
+      showToast(`✓ ID copied!`);
+    });
+  }
+
+  /* ── Toast (in case main.js not loaded yet) ── */
+  function showToast(msg, type = 'success') {
+    const existing = document.querySelector('.pay-toast');
+    if (existing) existing.remove();
+    const t = document.createElement('div');
+    t.className = `pay-toast fixed bottom-24 left-1/2 -translate-x-1/2 z-[200] px-6 py-3 rounded-full text-white text-sm font-semibold shadow-xl transition-all duration-300 ${type === 'success' ? 'bg-green-500' : 'bg-red-500'}`;
+    t.textContent = msg;
+    document.body.appendChild(t);
+    setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 3200);
+  }
+  </script>
 </body>
 </html>
