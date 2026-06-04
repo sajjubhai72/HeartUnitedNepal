@@ -1,0 +1,351 @@
+/* ============================================================
+   Hearts United Nepal Org — Global Stylesheet
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Poppins', sans-serif; }
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+#navbar { transition: transform .3s, box-shadow .3s; }
+#navbar.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,.10); }
+
+.nav-link {
+  position: relative;
+  display: inline-block;
+  padding: .45rem .9rem;
+  font-size: .875rem;
+  font-weight: 500;
+  color: #1d3557;
+  border-radius: 9999px;
+  transition: color .2s, background .2s;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 4px; left: 50%;
+  width: 0; height: 2px;
+  background: #e63946;
+  border-radius: 9999px;
+  transform: translateX(-50%);
+  transition: width .25s;
+}
+.nav-link:hover  { color: #e63946; }
+.nav-link:hover::after { width: 55%; }
+.nav-link.active { color: #e63946; background: #fde8ea; }
+.nav-link.active::after { width: 55%; }
+
+/* Hamburger */
+.hamburger-line {
+  display: block;
+  width: 22px; height: 2px;
+  background: #1d3557;
+  border-radius: 9999px;
+  transition: transform .3s, opacity .3s, width .3s;
+}
+#menuBtn.open .hamburger-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+#menuBtn.open .hamburger-line:nth-child(2) { opacity: 0; width: 0; }
+#menuBtn.open .hamburger-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Canvas links */
+.canvas-link {
+  display: flex; align-items: center; gap: .75rem;
+  padding: .75rem 1rem;
+  border-radius: .75rem;
+  color: #1d3557;
+  font-weight: 500;
+  font-size: .9rem;
+  transition: background .2s, color .2s, transform .2s;
+}
+.canvas-link:hover        { background: #fde8ea; color: #e63946; transform: translateX(4px); }
+.canvas-link.active       { background: #fde8ea; color: #e63946; }
+
+/* ============================================================
+   PAGE HERO BANNER (inner pages)
+   ============================================================ */
+.page-hero {
+  min-height: 340px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  padding-top: 80px;
+}
+.page-hero-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+}
+.page-hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(29,53,87,.88) 0%, rgba(230,57,70,.55) 100%);
+}
+.page-hero-content { position: relative; z-index: 10; text-align: center; color: #fff; padding: 2rem 1rem; }
+.page-hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,.2); color: #fff;
+  font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  padding: .3rem 1rem; border-radius: 9999px; border: 1px solid rgba(255,255,255,.3);
+  margin-bottom: .75rem;
+}
+.breadcrumb { display: flex; align-items: center; justify-content: center; gap: .4rem; font-size: .8rem; color: rgba(255,255,255,.7); margin-top: .75rem; }
+.breadcrumb a { color: rgba(255,255,255,.7); transition: color .2s; }
+.breadcrumb a:hover { color: #fff; }
+
+/* ============================================================
+   SECTION HELPERS
+   ============================================================ */
+.section-badge {
+  display: inline-block;
+  background: #fde8ea; color: #e63946;
+  font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  padding: .3rem .9rem; border-radius: 9999px;
+}
+.section-badge-white {
+  display: inline-block;
+  background: rgba(255,255,255,.2); color: #fff;
+  font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  padding: .3rem .9rem; border-radius: 9999px;
+}
+.section-title {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 800; color: #1d3557;
+  margin-top: .75rem; line-height: 1.2;
+}
+.section-subtitle {
+  color: #6b7280; max-width: 38rem; margin: .75rem auto 0;
+  font-size: .95rem; line-height: 1.75;
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: #e63946; color: #fff;
+  padding: .8rem 1.8rem; border-radius: 9999px;
+  font-weight: 600; font-size: .9rem;
+  transition: background .3s, transform .3s, box-shadow .3s;
+  box-shadow: 0 4px 18px rgba(230,57,70,.35);
+}
+.btn-primary:hover { background: #c1121f; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(230,57,70,.45); }
+
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: #1d3557; color: #fff;
+  padding: .8rem 1.8rem; border-radius: 9999px;
+  font-weight: 600; font-size: .9rem;
+  transition: background .3s, transform .3s;
+}
+.btn-secondary:hover { background: #457b9d; transform: translateY(-2px); }
+
+.btn-outline {
+  display: inline-flex; align-items: center; gap: .5rem;
+  border: 2px solid #e63946; color: #e63946;
+  padding: .75rem 1.75rem; border-radius: 9999px;
+  font-weight: 600; font-size: .9rem;
+  transition: background .3s, color .3s, transform .3s;
+}
+.btn-outline:hover { background: #e63946; color: #fff; transform: translateY(-2px); }
+
+/* Hero specific */
+.btn-primary-hero {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: #e63946; color: #fff;
+  padding: .9rem 2.1rem; border-radius: 9999px;
+  font-weight: 600; font-size: .95rem;
+  box-shadow: 0 4px 20px rgba(230,57,70,.4);
+  transition: background .3s, transform .3s, box-shadow .3s;
+}
+.btn-primary-hero:hover { background: #c1121f; transform: translateY(-3px); box-shadow: 0 8px 28px rgba(230,57,70,.5); }
+
+.btn-outline-hero {
+  display: inline-flex; align-items: center; gap: .5rem;
+  border: 2px solid rgba(255,255,255,.7); color: #fff;
+  padding: .9rem 2.1rem; border-radius: 9999px;
+  font-weight: 600; font-size: .95rem;
+  backdrop-filter: blur(6px);
+  transition: background .3s, border-color .3s, transform .3s;
+}
+.btn-outline-hero:hover { background: rgba(255,255,255,.18); border-color: #fff; transform: translateY(-3px); }
+
+/* ============================================================
+   CARDS — general
+   ============================================================ */
+.card {
+  background: #fff; border-radius: 1.25rem;
+  border: 1px solid #f0f0f0;
+  overflow: hidden;
+  transition: box-shadow .3s, transform .3s, border-color .3s;
+}
+.card:hover { box-shadow: 0 14px 44px rgba(0,0,0,.1); transform: translateY(-5px); border-color: #e63946; }
+
+/* Feature card */
+.feature-card {
+  background: #f9fafb; border: 1px solid #e5e7eb;
+  border-radius: 1rem; padding: 1.25rem;
+  transition: box-shadow .3s, transform .3s;
+}
+.feature-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.08); transform: translateY(-3px); }
+
+/* Program card */
+.program-card {
+  background: #fff; border: 1px solid #f0f0f0;
+  border-radius: 1.25rem; padding: 2rem 1.5rem;
+  transition: box-shadow .3s, transform .3s, border-color .3s;
+}
+.program-card:hover { box-shadow: 0 14px 44px rgba(0,0,0,.1); transform: translateY(-5px); border-color: #e63946; }
+.program-icon {
+  width: 3.5rem; height: 3.5rem;
+  border-radius: 1rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .3s;
+}
+.program-link {
+  display: inline-flex; align-items: center; gap: .4rem;
+  color: #e63946; font-size: .85rem; font-weight: 600;
+  margin-top: 1rem; transition: gap .2s;
+}
+.program-link:hover { gap: .65rem; }
+
+/* Stats */
+.stat-card {
+  background: rgba(255,255,255,.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 1rem; padding: 1.25rem .75rem; text-align: center;
+}
+.stat-number { font-size: 1.75rem; font-weight: 800; color: #fff; }
+
+/* Team */
+.team-card { text-align: center; }
+.team-img-wrap {
+  position: relative; width: 10rem; height: 10rem; margin: 0 auto;
+  border-radius: 50%; overflow: hidden; border: 4px solid #e5e7eb;
+  transition: border-color .3s;
+}
+.team-card:hover .team-img-wrap { border-color: #e63946; }
+.team-social {
+  position: absolute; inset: 0;
+  background: rgba(29,53,87,.75);
+  display: flex; align-items: center; justify-content: center; gap: .75rem;
+  opacity: 0; transition: opacity .3s;
+}
+.team-img-wrap:hover .team-social { opacity: 1; }
+.team-social a {
+  width: 2rem; height: 2rem;
+  background: #e63946; color: #fff; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .75rem; transition: background .2s, transform .2s;
+}
+.team-social a:hover { background: #fff; color: #e63946; transform: scale(1.15); }
+.team-info { margin-top: 1rem; }
+
+/* Gallery */
+.gallery-item {
+  position: relative; overflow: hidden;
+  border-radius: .9rem; aspect-ratio: 1; cursor: pointer;
+}
+.gallery-item img { transition: transform .4s; width: 100%; height: 100%; object-fit: cover; }
+.gallery-item:hover img { transform: scale(1.08); }
+.gallery-overlay {
+  position: absolute; inset: 0;
+  background: rgba(230,57,70,.6);
+  display: flex; align-items: center; justify-content: center; color: #fff;
+  opacity: 0; transition: opacity .3s;
+}
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+
+/* ============================================================
+   FORMS
+   ============================================================ */
+.form-input {
+  width: 100%; padding: .78rem 1.1rem;
+  border: 1.5px solid #e5e7eb; border-radius: .75rem;
+  font-size: .9rem; font-family: 'Poppins', sans-serif; color: #374151;
+  background: #fff; outline: none;
+  transition: border-color .25s, box-shadow .25s;
+}
+.form-input:focus { border-color: #e63946; box-shadow: 0 0 0 3px rgba(230,57,70,.12); }
+.form-input::placeholder { color: #9ca3af; }
+.form-label { display: block; font-size: .82rem; font-weight: 600; color: #374151; margin-bottom: .35rem; }
+
+/* Donate amount buttons */
+.donate-amt {
+  padding: .6rem .4rem; border: 1.5px solid #e5e7eb; border-radius: .75rem;
+  font-size: .8rem; font-weight: 600; color: #1d3557; background: #fff;
+  cursor: pointer; transition: all .2s;
+}
+.donate-amt:hover, .donate-amt.active { background: #e63946; color: #fff; border-color: #e63946; }
+
+/* ============================================================
+   CONTACT INFO
+   ============================================================ */
+.contact-info-card {
+  display: flex; align-items: flex-start; gap: 1rem;
+  background: #f9fafb; border-radius: 1rem; padding: 1.25rem;
+}
+.contact-icon {
+  width: 3rem; height: 3rem; background: #fde8ea; border-radius: .75rem;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.social-btn {
+  width: 2.75rem; height: 2.75rem; border-radius: 50%; color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .9rem; transition: transform .2s, opacity .2s;
+}
+.social-btn:hover { transform: translateY(-3px); opacity: .85; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer-link { color: rgba(255,255,255,.65); font-size: .875rem; transition: color .2s; }
+.footer-link:hover { color: #e63946; }
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity .65s ease, transform .65s ease;
+}
+.reveal.revealed { opacity: 1; transform: translateY(0); }
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes float       { 0%,100%{transform:translateY(0)}  50%{transform:translateY(-18px)} }
+@keyframes float-delay { 0%,100%{transform:translateY(0)}  50%{transform:translateY(-12px)} }
+@keyframes fade-in     { from{opacity:0} to{opacity:1} }
+@keyframes slide-up    { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+@keyframes pulse-ring  { 0%{transform:scale(1);opacity:.8} 100%{transform:scale(1.6);opacity:0} }
+
+.animate-float            { animation: float 5s ease-in-out infinite; }
+.animate-float-delay      { animation: float-delay 7s ease-in-out infinite; }
+.animate-fade-in          { animation: fade-in .8s ease forwards; }
+.animate-slide-up         { animation: slide-up .8s ease forwards; }
+.animate-slide-up-2       { animation: slide-up .9s .15s ease both; }
+.animate-slide-up-3       { animation: slide-up 1s  .3s  ease both; }
+.animate-fade-in-delay    { animation: fade-in 1s .5s ease both; }
+
+/* Scroll-top */
+#scrollTop.show { opacity: 1 !important; pointer-events: auto !important; }
+
+/* ============================================================
+   HERO BG IMAGES (per-page classes)
+   ============================================================ */
+.hero-home-bg     { background-image: url('https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=1600&q=80'); }
+.hero-about-bg    { background-image: url('https://images.unsplash.com/photo-1593113598332-cd288d649433?w=1600&q=80'); }
+.hero-programs-bg { background-image: url('https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=1600&q=80'); }
+.hero-gallery-bg  { background-image: url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1600&q=80'); }
+.hero-team-bg     { background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1600&q=80'); }
+.hero-volunteer-bg{ background-image: url('https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=1600&q=80'); }
+.hero-donate-bg   { background-image: url('https://images.unsplash.com/photo-1593113630400-ea4288922559?w=1600&q=80'); }
+.hero-contact-bg  { background-image: url('https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=1600&q=80'); }
+
+/* ============================================================
+   MOBILE TWEAKS
+   ============================================================ */
+@media (max-width: 640px) {
+  .stat-number { font-size: 1.4rem; }
+  .page-hero { min-height: 260px; }
+}

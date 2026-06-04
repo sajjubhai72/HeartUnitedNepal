@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Team — Hearts United Nepal Org</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script>tailwind.config={theme:{extend:{colors:{primary:'#e63946',secondary:'#1d3557',accent:'#457b9d',light:'#a8dadc',cream:'#f1faee'},fontFamily:{poppins:['Poppins','sans-serif']}}}}</script>
+</head>
+<body class="font-poppins bg-white text-gray-800 overflow-x-hidden">
+
+  <!-- NAVBAR -->
+  <nav id="navbar" class="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 lg:h-20">
+        <a href="index.html" class="flex items-center gap-3 group"><div class="w-10 h-10 lg:w-12 lg:h-12 bg-primary rounded-full flex items-center justify-center shadow-md group-hover:scale-110 transition-transform"><i class="fa-solid fa-heart text-white text-lg lg:text-xl"></i></div><div class="leading-tight"><span class="block text-base lg:text-lg font-bold text-secondary">Hearts United</span><span class="block text-xs text-primary font-medium tracking-wide">Nepal Org</span></div></a>
+        <ul class="hidden lg:flex items-center gap-1">
+          <li><a href="index.html"     class="nav-link">Home</a></li>
+          <li><a href="about.html"     class="nav-link">About Us</a></li>
+          <li><a href="programs.html"  class="nav-link">Programs</a></li>
+          <li><a href="gallery.html"   class="nav-link">Gallery</a></li>
+          <li><a href="team.html"      class="nav-link">Our Team</a></li>
+          <li><a href="volunteer.html" class="nav-link">Volunteer</a></li>
+          <li><a href="contact.html"   class="nav-link">Contact</a></li>
+        </ul>
+        <a href="donate.html" class="hidden lg:flex items-center gap-2 bg-primary hover:bg-red-700 text-white font-semibold px-5 py-2.5 rounded-full transition-all shadow-md hover:-translate-y-0.5 text-sm"><i class="fa-solid fa-heart-pulse"></i> Donate Now</a>
+        <button id="menuBtn" class="lg:hidden flex flex-col gap-1.5 p-2 rounded-lg hover:bg-gray-100 transition-colors"><span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span></button>
+      </div>
+    </div>
+  </nav>
+  <div id="canvasOverlay" class="fixed inset-0 bg-black/50 z-40 opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden"></div>
+  <aside id="mobileCanvas" class="fixed top-0 right-0 h-full w-72 sm:w-80 bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden flex flex-col">
+    <div class="flex items-center justify-between p-5 border-b bg-gradient-to-r from-secondary to-accent"><div class="flex items-center gap-3"><div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center"><i class="fa-solid fa-heart text-white"></i></div><div><span class="block text-sm font-bold text-white">Hearts United</span><span class="block text-xs text-light">Nepal Org</span></div></div><button id="closeCanvas" class="w-9 h-9 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 text-white transition-colors"><i class="fa-solid fa-xmark text-lg"></i></button></div>
+    <nav class="flex-1 overflow-y-auto py-4 px-4"><ul class="space-y-1">
+      <li><a href="index.html"     class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-house w-5"></i> Home</a></li>
+      <li><a href="about.html"     class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-circle-info w-5"></i> About Us</a></li>
+      <li><a href="programs.html"  class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-hands-holding-child w-5"></i> Programs</a></li>
+      <li><a href="gallery.html"   class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-images w-5"></i> Gallery</a></li>
+      <li><a href="team.html"      class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-people-group w-5"></i> Our Team</a></li>
+      <li><a href="volunteer.html" class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-hand-holding-heart w-5"></i> Volunteer</a></li>
+      <li><a href="contact.html"   class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-envelope w-5"></i> Contact</a></li>
+    </ul></nav>
+    <div class="p-4 border-t"><a href="donate.html" onclick="closeCanvas()" class="flex items-center justify-center gap-2 w-full bg-primary hover:bg-red-700 text-white font-semibold py-3 rounded-full transition-all"><i class="fa-solid fa-heart-pulse"></i> Donate Now</a><div class="flex justify-center gap-3 mt-4"><a href="#" class="w-9 h-9 rounded-full bg-gray-100 hover:bg-blue-600 hover:text-white flex items-center justify-center text-gray-500 transition-all"><i class="fab fa-facebook-f text-sm"></i></a><a href="#" class="w-9 h-9 rounded-full bg-gray-100 hover:bg-pink-600 hover:text-white flex items-center justify-center text-gray-500 transition-all"><i class="fab fa-instagram text-sm"></i></a><a href="#" class="w-9 h-9 rounded-full bg-gray-100 hover:bg-red-600 hover:text-white flex items-center justify-center text-gray-500 transition-all"><i class="fab fa-youtube text-sm"></i></a></div></div>
+  </aside>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-bg hero-team-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <span class="page-hero-badge">The People</span>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mt-2 mb-4">Meet Our Team</h1>
+      <p class="text-white/80 text-base sm:text-lg max-w-xl mx-auto">Passionate individuals working together to make a lasting difference in Nepal.</p>
+      <div class="breadcrumb mt-4"><a href="index.html">Home</a><i class="fa-solid fa-chevron-right text-xs"></i><span class="text-white">Our Team</span></div>
+    </div>
+  </div>
+
+  <!-- LEADERSHIP -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <span class="section-badge">Leadership</span>
+        <h2 class="section-title">Board & Leadership</h2>
+        <p class="section-subtitle">Our leadership team brings decades of combined experience in social work, healthcare, and community development.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div class="team-card reveal-item">
+          <div class="team-img-wrap w-36 h-36"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=80" alt="Rajesh Sharma" class="w-full h-full object-cover" /><div class="team-social"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div></div>
+          <div class="team-info mt-4">
+            <h4 class="font-bold text-secondary text-xl">Rajesh Sharma</h4>
+            <p class="text-primary text-sm font-semibold mt-1">Founder &amp; President</p>
+            <p class="text-gray-500 text-sm mt-2 max-w-xs mx-auto leading-relaxed">Social entrepreneur with 15+ years of experience in humanitarian work across Nepal and South Asia.</p>
+          </div>
+        </div>
+        <div class="team-card reveal-item">
+          <div class="team-img-wrap w-36 h-36"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&q=80" alt="Sita Poudel" class="w-full h-full object-cover" /><div class="team-social"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div></div>
+          <div class="team-info mt-4">
+            <h4 class="font-bold text-secondary text-xl">Sita Poudel</h4>
+            <p class="text-primary text-sm font-semibold mt-1">Executive Director</p>
+            <p class="text-gray-500 text-sm mt-2 max-w-xs mx-auto leading-relaxed">Public health professional dedicated to improving healthcare access in remote communities.</p>
+          </div>
+        </div>
+        <div class="team-card reveal-item">
+          <div class="team-img-wrap w-36 h-36"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&q=80" alt="Bikash Thapa" class="w-full h-full object-cover" /><div class="team-social"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div></div>
+          <div class="team-info mt-4">
+            <h4 class="font-bold text-secondary text-xl">Bikash Thapa</h4>
+            <p class="text-primary text-sm font-semibold mt-1">Program Director</p>
+            <p class="text-gray-500 text-sm mt-2 max-w-xs mx-auto leading-relaxed">Education specialist focused on creating sustainable learning programs for underprivileged children.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CORE TEAM -->
+  <section class="py-20 bg-cream">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <span class="section-badge">Core Team</span>
+        <h2 class="section-title">Our Dedicated Team</h2>
+        <p class="section-subtitle">Every member brings unique skills and a shared passion for serving Nepal's communities.</p>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div class="team-card reveal-item">
+          <div class="team-img-wrap"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&q=80" alt="" class="w-full h-full object-cover" /><div class="team-social"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div></div>
+          <div class="team-info mt-3"><h4 class="font-bold text-secondary">Anita Gurung</h4><p class="text-primary text-xs font-medium mt-0.5">Volunteer Lead</p></div>
+        </div>
+        <div class="team-card reveal-item">
+          <div class="team-img-wrap"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&q=80" alt="" class="w-full h-full object-cover" /><div class="team-social"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div></div>
+          <div class="team-info mt-3"><h4 class="font-bold text-secondary">Rohan Karki</h4><p class="text-primary text-xs font-medium mt-0.5">Field Coordinator</p></div>
+        </div>
+        <div class="team-card reveal-item">
+          <div class="team-img-wrap"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&q=80" alt="" class="w-full h-full object-cover" /><div class="team-social"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div></div>
+          <div class="team-info mt-3"><h4 class="font-bold text-secondary">Priya Bhandari</h4><p class="text-primary text-xs font-medium mt-0.5">Health Officer</p></div>
+        </div>
+        <div class="team-card reveal-item">
+          <div class="team-img-wrap"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&q=80" alt="" class="w-full h-full object-cover" /><div class="team-social"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div></div>
+          <div class="team-info mt-3"><h4 class="font-bold text-secondary">Sajan Rai</h4><p class="text-primary text-xs font-medium mt-0.5">Finance Manager</p></div>
+        </div>
+        <div class="team-card reveal-item">
+          <div class="team-img-wrap"><img src="https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=300&q=80" alt="" class="w-full h-full object-cover" /><div class="team-social"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div></div>
+          <div class="team-info mt-3"><h4 class="font-bold text-secondary">Maya Shrestha</h4><p class="text-primary text-xs font-medium mt-0.5">Communications</p></div>
+        </div>
+        <div class="team-card reveal-item">
+          <div class="team-img-wrap"><img src="https://images.unsplash.com/photo-1489980557514-251d61e3eeb6?w=300&q=80" alt="" class="w-full h-full object-cover" /><div class="team-social"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div></div>
+          <div class="team-info mt-3"><h4 class="font-bold text-secondary">Deepak Magar</h4><p class="text-primary text-xs font-medium mt-0.5">IT Coordinator</p></div>
+        </div>
+        <div class="team-card reveal-item">
+          <div class="team-img-wrap"><img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=300&q=80" alt="" class="w-full h-full object-cover" /><div class="team-social"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div></div>
+          <div class="team-info mt-3"><h4 class="font-bold text-secondary">Sunita Tamang</h4><p class="text-primary text-xs font-medium mt-0.5">Social Worker</p></div>
+        </div>
+        <div class="team-card reveal-item">
+          <div class="team-img-wrap"><img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?w=300&q=80" alt="" class="w-full h-full object-cover" /><div class="team-social"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div></div>
+          <div class="team-info mt-3"><h4 class="font-bold text-secondary">Arjun Basnet</h4><p class="text-primary text-xs font-medium mt-0.5">Legal Advisor</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOIN TEAM CTA -->
+  <section class="py-16 bg-gradient-to-r from-secondary to-accent text-center text-white">
+    <div class="max-w-2xl mx-auto px-4">
+      <i class="fa-solid fa-people-group text-4xl text-light mb-4"></i>
+      <h2 class="text-3xl font-extrabold mb-4">Want to Join Our Team?</h2>
+      <p class="text-white/80 mb-8">We're always looking for passionate individuals to join our mission. Volunteer or apply for open positions.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="volunteer.html" class="btn-primary-hero"><i class="fa-solid fa-hand-holding-heart"></i> Become a Volunteer</a>
+        <a href="contact.html"   class="btn-outline-hero"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-secondary text-white pt-16 pb-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div><div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center"><i class="fa-solid fa-heart text-white"></i></div><div><span class="block font-bold">Hearts United</span><span class="block text-xs text-light">Nepal Org</span></div></div><p class="text-white/60 text-sm leading-relaxed mb-5">Dedicated to creating a compassionate Nepal through community-driven programs.</p><div class="flex gap-3"><a href="#" class="social-btn bg-blue-600"><i class="fab fa-facebook-f text-sm"></i></a><a href="#" class="social-btn bg-pink-600"><i class="fab fa-instagram text-sm"></i></a><a href="#" class="social-btn bg-red-600"><i class="fab fa-youtube text-sm"></i></a><a href="#" class="social-btn bg-green-600"><i class="fab fa-whatsapp text-sm"></i></a></div></div>
+        <div><h4 class="font-bold text-lg mb-4 text-light">Quick Links</h4><ul class="space-y-2"><li><a href="index.html" class="footer-link">Home</a></li><li><a href="about.html" class="footer-link">About Us</a></li><li><a href="programs.html" class="footer-link">Programs</a></li><li><a href="gallery.html" class="footer-link">Gallery</a></li><li><a href="volunteer.html" class="footer-link">Volunteer</a></li><li><a href="donate.html" class="footer-link">Donate</a></li></ul></div>
+        <div><h4 class="font-bold text-lg mb-4 text-light">Our Programs</h4><ul class="space-y-2"><li><a href="programs.html" class="footer-link">Education Support</a></li><li><a href="programs.html" class="footer-link">Medical Camps</a></li><li><a href="programs.html" class="footer-link">Food & Nutrition</a></li><li><a href="programs.html" class="footer-link">Disaster Relief</a></li><li><a href="programs.html" class="footer-link">Women Empowerment</a></li></ul></div>
+        <div><h4 class="font-bold text-lg mb-4 text-light">Newsletter</h4><p class="text-white/60 text-sm mb-4">Stay updated with our latest news.</p><form id="newsletterForm" class="flex gap-2"><input type="email" placeholder="Your email" class="flex-1 px-4 py-2.5 rounded-full bg-white/10 border border-white/20 text-white placeholder-white/40 text-sm focus:outline-none focus:border-primary" required /><button type="submit" class="bg-primary hover:bg-red-700 text-white px-4 py-2.5 rounded-full text-sm transition-colors"><i class="fa-solid fa-paper-plane"></i></button></form><div class="mt-6 space-y-2 text-sm text-white/60"><p><i class="fa-solid fa-location-dot text-primary mr-2"></i>Kathmandu, Nepal</p><p><i class="fa-solid fa-phone text-primary mr-2"></i>+977-98XXXXXXXX</p><p><i class="fa-solid fa-envelope text-primary mr-2"></i>info@heartsunitednepal.org</p></div></div>
+      </div>
+      <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-sm text-white/50"><p>&copy; 2025 Hearts United Nepal Org. All rights reserved.</p><p>Made with <i class="fa-solid fa-heart text-primary mx-1"></i> for Nepal</p></div>
+    </div>
+  </footer>
+  <button id="scrollTop" class="fixed bottom-6 right-6 w-12 h-12 bg-primary text-white rounded-full shadow-xl flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 hover:bg-red-700 hover:scale-110 z-40"><i class="fa-solid fa-chevron-up"></i></button>
+  <script src="js/main.js"></script>
+</body>
+</html>

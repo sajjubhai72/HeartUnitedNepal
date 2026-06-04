@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — Hearts United Nepal Org</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script>tailwind.config={theme:{extend:{colors:{primary:'#e63946',secondary:'#1d3557',accent:'#457b9d',light:'#a8dadc',cream:'#f1faee'},fontFamily:{poppins:['Poppins','sans-serif']}}}}</script>
+</head>
+<body class="font-poppins bg-white text-gray-800 overflow-x-hidden">
+
+  <!-- NAVBAR -->
+  <nav id="navbar" class="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 lg:h-20">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 lg:w-12 lg:h-12 bg-primary rounded-full flex items-center justify-center shadow-md group-hover:scale-110 transition-transform"><i class="fa-solid fa-heart text-white text-lg lg:text-xl"></i></div>
+          <div class="leading-tight"><span class="block text-base lg:text-lg font-bold text-secondary">Hearts United</span><span class="block text-xs text-primary font-medium tracking-wide">Nepal Org</span></div>
+        </a>
+        <ul class="hidden lg:flex items-center gap-1">
+          <li><a href="index.html"     class="nav-link">Home</a></li>
+          <li><a href="about.html"     class="nav-link">About Us</a></li>
+          <li><a href="programs.html"  class="nav-link">Programs</a></li>
+          <li><a href="gallery.html"   class="nav-link">Gallery</a></li>
+          <li><a href="team.html"      class="nav-link">Our Team</a></li>
+          <li><a href="volunteer.html" class="nav-link">Volunteer</a></li>
+          <li><a href="contact.html"   class="nav-link">Contact</a></li>
+        </ul>
+        <a href="donate.html" class="hidden lg:flex items-center gap-2 bg-primary hover:bg-red-700 text-white font-semibold px-5 py-2.5 rounded-full transition-all shadow-md hover:-translate-y-0.5 text-sm"><i class="fa-solid fa-heart-pulse"></i> Donate Now</a>
+        <button id="menuBtn" class="lg:hidden flex flex-col gap-1.5 p-2 rounded-lg hover:bg-gray-100 transition-colors"><span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CANVAS -->
+  <div id="canvasOverlay" class="fixed inset-0 bg-black/50 z-40 opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden"></div>
+  <aside id="mobileCanvas" class="fixed top-0 right-0 h-full w-72 sm:w-80 bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden flex flex-col">
+    <div class="flex items-center justify-between p-5 border-b border-gray-100 bg-gradient-to-r from-secondary to-accent">
+      <div class="flex items-center gap-3"><div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center"><i class="fa-solid fa-heart text-white"></i></div><div class="leading-tight"><span class="block text-sm font-bold text-white">Hearts United</span><span class="block text-xs text-light">Nepal Org</span></div></div>
+      <button id="closeCanvas" class="w-9 h-9 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 text-white transition-colors"><i class="fa-solid fa-xmark text-lg"></i></button>
+    </div>
+    <nav class="flex-1 overflow-y-auto py-4 px-4"><ul class="space-y-1">
+      <li><a href="index.html"     class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-house w-5"></i> Home</a></li>
+      <li><a href="about.html"     class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-circle-info w-5"></i> About Us</a></li>
+      <li><a href="programs.html"  class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-hands-holding-child w-5"></i> Programs</a></li>
+      <li><a href="gallery.html"   class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-images w-5"></i> Gallery</a></li>
+      <li><a href="team.html"      class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-people-group w-5"></i> Our Team</a></li>
+      <li><a href="volunteer.html" class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-hand-holding-heart w-5"></i> Volunteer</a></li>
+      <li><a href="contact.html"   class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-envelope w-5"></i> Contact</a></li>
+    </ul></nav>
+    <div class="p-4 border-t border-gray-100">
+      <a href="donate.html" onclick="closeCanvas()" class="flex items-center justify-center gap-2 w-full bg-primary hover:bg-red-700 text-white font-semibold py-3 rounded-full transition-all shadow-md"><i class="fa-solid fa-heart-pulse"></i> Donate Now</a>
+      <div class="flex justify-center gap-3 mt-4">
+        <a href="#" class="w-9 h-9 rounded-full bg-gray-100 hover:bg-blue-600 hover:text-white flex items-center justify-center text-gray-500 transition-all"><i class="fab fa-facebook-f text-sm"></i></a>
+        <a href="#" class="w-9 h-9 rounded-full bg-gray-100 hover:bg-pink-600 hover:text-white flex items-center justify-center text-gray-500 transition-all"><i class="fab fa-instagram text-sm"></i></a>
+        <a href="#" class="w-9 h-9 rounded-full bg-gray-100 hover:bg-red-600 hover:text-white flex items-center justify-center text-gray-500 transition-all"><i class="fab fa-youtube text-sm"></i></a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-bg hero-about-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <span class="page-hero-badge">Our Story</span>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mt-2 mb-4">About Hearts United Nepal</h1>
+      <p class="text-white/80 text-base sm:text-lg max-w-xl mx-auto">Learn about who we are, our mission, and the journey that drives us to serve Nepal.</p>
+      <div class="breadcrumb mt-4"><a href="index.html">Home</a><i class="fa-solid fa-chevron-right text-xs"></i><span class="text-white">About Us</span></div>
+    </div>
+  </div>
+
+  <!-- MISSION & VISION -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+        <div>
+          <span class="section-badge">Who We Are</span>
+          <h2 class="section-title mt-3">Our Mission &amp; Vision</h2>
+          <p class="text-gray-600 leading-relaxed mt-5">Hearts United Nepal Org was founded with the belief that every Nepali deserves access to basic needs — healthcare, education, and dignity. We work tirelessly to bridge the gap between those in need and those who can help.</p>
+          <p class="text-gray-600 leading-relaxed mt-4">Our vision is a Nepal where every child can go to school, every family has access to healthcare, and no one goes to sleep hungry. Since our founding in 2016, we have been steadily working towards that vision.</p>
+          <div class="flex flex-col sm:flex-row gap-4 mt-8">
+            <a href="programs.html" class="btn-primary">Our Programs <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="contact.html"  class="btn-outline">Get In Touch</a>
+          </div>
+        </div>
+        <div class="relative">
+          <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=700&q=80" alt="Community work" class="rounded-2xl w-full h-80 lg:h-[420px] object-cover shadow-2xl" />
+          <div class="absolute -bottom-6 -left-6 bg-primary text-white p-5 rounded-2xl shadow-xl">
+            <p class="text-3xl font-extrabold">8+</p>
+            <p class="text-xs text-red-200">Years of Service</p>
+          </div>
+          <div class="absolute -top-6 -right-6 bg-secondary text-white p-5 rounded-2xl shadow-xl hidden sm:block">
+            <p class="text-3xl font-extrabold">5K+</p>
+            <p class="text-xs text-light">Lives Impacted</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="py-20 bg-cream">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <span class="section-badge">What We Stand For</span>
+        <h2 class="section-title">Our Core Values</h2>
+        <p class="section-subtitle">These values guide every decision we make and every action we take in service of our communities.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="feature-card reveal-item p-6">
+          <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mb-4"><i class="fa-solid fa-heart text-primary text-xl"></i></div>
+          <h3 class="font-bold text-secondary text-lg mb-2">Compassion</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">We approach every individual and community with empathy, respect, and genuine care for their wellbeing.</p>
+        </div>
+        <div class="feature-card reveal-item p-6">
+          <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4"><i class="fa-solid fa-scale-balanced text-secondary text-xl"></i></div>
+          <h3 class="font-bold text-secondary text-lg mb-2">Integrity</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Full transparency in how we use donations and resources, with regular public reporting of our work.</p>
+        </div>
+        <div class="feature-card reveal-item p-6">
+          <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4"><i class="fa-solid fa-people-group text-green-600 text-xl"></i></div>
+          <h3 class="font-bold text-secondary text-lg mb-2">Community First</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">We work with communities, not just for them. Local voices lead our programs and initiatives.</p>
+        </div>
+        <div class="feature-card reveal-item p-6">
+          <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4"><i class="fa-solid fa-lightbulb text-purple-600 text-xl"></i></div>
+          <h3 class="font-bold text-secondary text-lg mb-2">Innovation</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Continuously improving our methods and embracing new solutions to address social challenges.</p>
+        </div>
+        <div class="feature-card reveal-item p-6">
+          <div class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center mb-4"><i class="fa-solid fa-seedling text-yellow-600 text-xl"></i></div>
+          <h3 class="font-bold text-secondary text-lg mb-2">Sustainability</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Building long-term impact through programs that create lasting, self-sustaining change.</p>
+        </div>
+        <div class="feature-card reveal-item p-6">
+          <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center mb-4"><i class="fa-solid fa-handshake text-teal-600 text-xl"></i></div>
+          <h3 class="font-bold text-secondary text-lg mb-2">Partnership</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Collaborating with local and international organizations to amplify our impact across Nepal.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <span class="section-badge">Our Journey</span>
+        <h2 class="section-title">Our Milestones</h2>
+        <p class="section-subtitle">From humble beginnings to a growing movement — our journey of impact over the years.</p>
+      </div>
+      <div class="relative">
+        <div class="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-0.5 bg-gray-200 hidden sm:block"></div>
+        <div class="space-y-10">
+          <!-- Item -->
+          <div class="flex flex-col sm:flex-row items-start gap-6 reveal-item">
+            <div class="sm:w-1/2 sm:text-right sm:pr-10">
+              <span class="inline-block bg-primary text-white text-sm font-bold px-3 py-1 rounded-full mb-2">2016</span>
+              <h3 class="font-bold text-secondary text-lg">Organization Founded</h3>
+              <p class="text-gray-500 text-sm mt-1">Hearts United Nepal Org was established with a small team of passionate volunteers in Kathmandu.</p>
+            </div>
+            <div class="sm:w-8 sm:h-8 w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0 sm:mx-auto z-10"><i class="fa-solid fa-flag text-white text-xs"></i></div>
+            <div class="sm:w-1/2 sm:pl-10 hidden sm:block"></div>
+          </div>
+          <div class="flex flex-col sm:flex-row items-start gap-6 reveal-item">
+            <div class="sm:w-1/2 sm:text-right sm:pr-10 hidden sm:block"></div>
+            <div class="sm:w-8 sm:h-8 w-8 h-8 bg-secondary rounded-full flex items-center justify-center flex-shrink-0 sm:mx-auto z-10"><i class="fa-solid fa-graduation-cap text-white text-xs"></i></div>
+            <div class="sm:w-1/2 sm:pl-10">
+              <span class="inline-block bg-secondary text-white text-sm font-bold px-3 py-1 rounded-full mb-2">2017</span>
+              <h3 class="font-bold text-secondary text-lg">First Education Drive</h3>
+              <p class="text-gray-500 text-sm mt-1">Distributed 500 school kits to underprivileged students in Sindhupalchok district.</p>
+            </div>
+          </div>
+          <div class="flex flex-col sm:flex-row items-start gap-6 reveal-item">
+            <div class="sm:w-1/2 sm:text-right sm:pr-10">
+              <span class="inline-block bg-primary text-white text-sm font-bold px-3 py-1 rounded-full mb-2">2019</span>
+              <h3 class="font-bold text-secondary text-lg">First Medical Camp</h3>
+              <p class="text-gray-500 text-sm mt-1">Organized free medical camp serving 800+ patients in remote communities of Dolakha.</p>
+            </div>
+            <div class="sm:w-8 sm:h-8 w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0 sm:mx-auto z-10"><i class="fa-solid fa-stethoscope text-white text-xs"></i></div>
+            <div class="sm:w-1/2 sm:pl-10 hidden sm:block"></div>
+          </div>
+          <div class="flex flex-col sm:flex-row items-start gap-6 reveal-item">
+            <div class="sm:w-1/2 sm:text-right sm:pr-10 hidden sm:block"></div>
+            <div class="sm:w-8 sm:h-8 w-8 h-8 bg-secondary rounded-full flex items-center justify-center flex-shrink-0 sm:mx-auto z-10"><i class="fa-solid fa-people-group text-white text-xs"></i></div>
+            <div class="sm:w-1/2 sm:pl-10">
+              <span class="inline-block bg-secondary text-white text-sm font-bold px-3 py-1 rounded-full mb-2">2021</span>
+              <h3 class="font-bold text-secondary text-lg">100+ Volunteers</h3>
+              <p class="text-gray-500 text-sm mt-1">Reached a milestone of 100 registered volunteers across 8 districts of Nepal.</p>
+            </div>
+          </div>
+          <div class="flex flex-col sm:flex-row items-start gap-6 reveal-item">
+            <div class="sm:w-1/2 sm:text-right sm:pr-10">
+              <span class="inline-block bg-primary text-white text-sm font-bold px-3 py-1 rounded-full mb-2">2024</span>
+              <h3 class="font-bold text-secondary text-lg">5,000 Lives Impacted</h3>
+              <p class="text-gray-500 text-sm mt-1">Celebrated reaching 5,000+ lives impacted across 12 districts with 45+ completed projects.</p>
+            </div>
+            <div class="sm:w-8 sm:h-8 w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0 sm:mx-auto z-10"><i class="fa-solid fa-star text-white text-xs"></i></div>
+            <div class="sm:w-1/2 sm:pl-10 hidden sm:block"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-gradient-to-r from-secondary to-accent text-white text-center">
+    <div class="max-w-2xl mx-auto px-4">
+      <h2 class="text-3xl font-extrabold mb-4">Join Our Mission</h2>
+      <p class="text-white/80 mb-8">Whether you donate, volunteer, or spread the word — every action makes a difference.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="volunteer.html" class="btn-primary-hero"><i class="fa-solid fa-hand-holding-heart"></i> Volunteer</a>
+        <a href="donate.html"    class="btn-outline-hero"><i class="fa-solid fa-heart-pulse"></i> Donate</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-secondary text-white pt-16 pb-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div>
+          <div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center"><i class="fa-solid fa-heart text-white"></i></div><div><span class="block font-bold text-lg">Hearts United</span><span class="block text-xs text-light">Nepal Org</span></div></div>
+          <p class="text-white/60 text-sm leading-relaxed mb-5">Dedicated to creating a compassionate Nepal through community-driven programs since 2016.</p>
+          <div class="flex gap-3">
+            <a href="#" class="social-btn bg-blue-600"><i class="fab fa-facebook-f text-sm"></i></a>
+            <a href="#" class="social-btn bg-pink-600"><i class="fab fa-instagram text-sm"></i></a>
+            <a href="#" class="social-btn bg-red-600"><i class="fab fa-youtube text-sm"></i></a>
+            <a href="#" class="social-btn bg-green-600"><i class="fab fa-whatsapp text-sm"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-bold text-lg mb-4 text-light">Quick Links</h4>
+          <ul class="space-y-2">
+            <li><a href="index.html"     class="footer-link">Home</a></li>
+            <li><a href="about.html"     class="footer-link">About Us</a></li>
+            <li><a href="programs.html"  class="footer-link">Programs</a></li>
+            <li><a href="gallery.html"   class="footer-link">Gallery</a></li>
+            <li><a href="volunteer.html" class="footer-link">Volunteer</a></li>
+            <li><a href="donate.html"    class="footer-link">Donate</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-lg mb-4 text-light">Our Programs</h4>
+          <ul class="space-y-2">
+            <li><a href="programs.html" class="footer-link">Education Support</a></li>
+            <li><a href="programs.html" class="footer-link">Medical Camps</a></li>
+            <li><a href="programs.html" class="footer-link">Food & Nutrition</a></li>
+            <li><a href="programs.html" class="footer-link">Disaster Relief</a></li>
+            <li><a href="programs.html" class="footer-link">Women Empowerment</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-lg mb-4 text-light">Newsletter</h4>
+          <p class="text-white/60 text-sm mb-4">Stay updated with our latest news and events.</p>
+          <form id="newsletterForm" class="flex gap-2">
+            <input type="email" placeholder="Your email" class="flex-1 px-4 py-2.5 rounded-full bg-white/10 border border-white/20 text-white placeholder-white/40 text-sm focus:outline-none focus:border-primary" required />
+            <button type="submit" class="bg-primary hover:bg-red-700 text-white px-4 py-2.5 rounded-full text-sm transition-colors"><i class="fa-solid fa-paper-plane"></i></button>
+          </form>
+          <div class="mt-6 space-y-2 text-sm text-white/60">
+            <p><i class="fa-solid fa-location-dot text-primary mr-2"></i>Kathmandu, Nepal</p>
+            <p><i class="fa-solid fa-phone text-primary mr-2"></i>+977-98XXXXXXXX</p>
+            <p><i class="fa-solid fa-envelope text-primary mr-2"></i>info@heartsunitednepal.org</p>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-sm text-white/50">
+        <p>&copy; 2025 Hearts United Nepal Org. All rights reserved.</p>
+        <p>Made with <i class="fa-solid fa-heart text-primary mx-1"></i> for Nepal</p>
+      </div>
+    </div>
+  </footer>
+
+  <button id="scrollTop" class="fixed bottom-6 right-6 w-12 h-12 bg-primary text-white rounded-full shadow-xl flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 hover:bg-red-700 hover:scale-110 z-40"><i class="fa-solid fa-chevron-up"></i></button>
+  <script src="js/main.js"></script>
+</body>
+</html>
