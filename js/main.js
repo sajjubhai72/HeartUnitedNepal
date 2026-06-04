@@ -141,9 +141,7 @@ document.getElementById('contactForm')?.addEventListener('submit', e => {
 document.getElementById('volunteerForm')?.addEventListener('submit', e => {
   e.preventDefault(); showToast('✓ Application submitted! Thank you.'); e.target.reset();
 });
-document.getElementById('donateForm')?.addEventListener('submit', e => {
-  e.preventDefault(); showToast('✓ Thank you for your generous donation! ❤️'); e.target.reset();
-});
+// donateForm is handled in donate.html inline script (opens payment modal)
 document.getElementById('newsletterForm')?.addEventListener('submit', e => {
   e.preventDefault(); showToast('✓ Subscribed to newsletter!'); e.target.reset();
 });
