@@ -7,8 +7,6 @@
   <link rel="stylesheet" href="css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <!-- QR Code generator library -->
-  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
   <script>tailwind.config={theme:{extend:{colors:{primary:'#e63946',secondary:'#1d3557',accent:'#457b9d',light:'#a8dadc',cream:'#f1faee'},fontFamily:{poppins:['Poppins','sans-serif']}}}}</script>
 
   <style>
@@ -267,7 +265,7 @@
           <!-- Donor info form -->
           <form id="donateForm" class="space-y-4">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div><label class="form-label">Your Name *</label><input type="text" id="donorName" class="form-input" placeholder="Ramesh Sharma" required /></div>
+              <div><label class="form-label">Your Name *</label><input type="text" id="donorName" class="form-input" placeholder="Your Name" required /></div>
               <div><label class="form-label">Email Address *</label><input type="email" id="donorEmail" class="form-input" placeholder="you@example.com" required /></div>
             </div>
             <div><label class="form-label">Phone (Optional)</label><input type="tel" id="donorPhone" class="form-input" placeholder="+977-98XXXXXXXX" /></div>
@@ -284,7 +282,7 @@
             <div><label class="form-label">Message (Optional)</label><input type="text" id="donorMsg" class="form-input" placeholder="A note for the team..." /></div>
 
             <!-- ★ PROCEED TO PAYMENT button ★ -->
-            <button type="submit" id="proceedBtn"
+            <button type="button" id="proceedBtn" onclick="handleProceed()"
               class="w-full bg-primary hover:bg-red-700 text-white font-bold py-4 rounded-full transition-all shadow-md hover:shadow-lg text-lg flex items-center justify-center gap-2 group">
               <i class="fa-solid fa-heart-pulse group-hover:animate-pulse"></i>
               Proceed to Payment
@@ -513,34 +511,41 @@
 
   <!-- ══════════════════ SCRIPTS ══════════════════ -->
   <script src="js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
   <script>
   'use strict';
 
-  /* ── Config — replace with your actual eSewa/Khalti merchant details ── */
-  const ORG_ESEWA_ID  = '9819341743';   // eSewa registered phone / merchant ID
-  const ORG_KHALTI_ID = '9819341743';   // Khalti registered phone / merchant ID
+  /* ── Config ── */
+  const ORG_ESEWA_ID  = '9819341743';
+  const ORG_KHALTI_ID = '9819341743';
   const ORG_NAME      = 'Hearts United Nepal Org';
 
   /* ── State ── */
   let selectedAmount = 500;
 
-  /* ── Helpers ── */
+  /* ── Get current selected amount ── */
   function getAmount() {
-    const custom = document.getElementById('customAmt');
-    const active = document.querySelector('.donate-amt.active');
-    if (active && active.dataset.amount === 'custom') {
-      return parseInt(custom?.value) || 0;
+    const activeBtn = document.querySelector('.donate-amt.active');
+    if (!activeBtn) return 500;
+    if (activeBtn.dataset.amount === 'custom') {
+      const v = parseInt(document.getElementById('customAmt')?.value);
+      return isNaN(v) ? 0 : v;
     }
-    return parseInt(active?.dataset.amount) || 500;
+    return parseInt(activeBtn.dataset.amount) || 500;
   }
 
   function formatNPR(n) {
-    return 'Rs ' + Number(n).toLocaleString('en-NP');
+    return 'Rs\u00a0' + Number(n).toLocaleString('en-IN');
   }
 
-  /* ── Amount selector (extends main.js) ── */
+  /* ── Sync amount on every selector click ── */
   document.querySelectorAll('.donate-amt').forEach(btn => {
     btn.addEventListener('click', () => {
+      document.querySelectorAll('.donate-amt').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const wrap = document.getElementById('customAmtWrap');
+      if (wrap) wrap.classList.toggle('hidden', btn.dataset.amount !== 'custom');
+      if (btn.dataset.amount === 'custom') document.getElementById('customAmt')?.focus();
       selectedAmount = getAmount();
     });
   });
@@ -548,17 +553,28 @@
     selectedAmount = getAmount();
   });
 
+  /* ── MAIN entry: called by Proceed to Payment button (type=button) ── */
+  function handleProceed() {
+    const amt     = getAmount();
+    const purpose = document.getElementById('donorPurpose')?.value || 'General Fund';
+
+    if (!amt || amt < 1) {
+      showPayToast('Please select or enter a valid amount.', 'error');
+      return;
+    }
+
+    openPaymentModal(amt, purpose);
+  }
+
   /* ── Generate QR ── */
   function generateQR(amount) {
     const canvas = document.getElementById('qrCanvas');
-    if (!canvas) return;
-    // QR data: plain text payment info (works with all QR scanners)
-    const qrData = `Pay NPR ${amount} to ${ORG_NAME}\neSewa: ${ORG_ESEWA_ID}\nKhalti: ${ORG_KHALTI_ID}`;
+    if (!canvas || typeof QRCode === 'undefined') return;
+    const qrData = `Pay NPR ${amount} to ${ORG_NAME} | eSewa: ${ORG_ESEWA_ID} | Khalti: ${ORG_KHALTI_ID}`;
     QRCode.toCanvas(canvas, qrData, {
-      width: 180,
-      margin: 2,
+      width: 190, margin: 2,
       color: { dark: '#1d3557', light: '#ffffff' }
-    }, err => { if (err) console.error(err); });
+    }, err => { if (err) console.error('QR error:', err); });
   }
 
   /* ── Download QR ── */
@@ -571,22 +587,19 @@
     link.click();
   });
 
-  /* ── Open payment modal ── */
+  /* ── Open modal ── */
   function openPaymentModal(amount, purpose) {
     selectedAmount = amount;
-    const amtStr   = formatNPR(amount);
+    const amtStr = formatNPR(amount);
 
-    // Update modal UI
     document.getElementById('modalAmount').textContent  = amtStr;
-    document.getElementById('modalPurpose').textContent = purpose || 'General Fund';
+    document.getElementById('modalPurpose').textContent = purpose;
     document.getElementById('qrAmtLabel').textContent   = amtStr;
-    document.getElementById('esewaAmtBtn').textContent  = `(${amtStr})`;
-    document.getElementById('khaltiAmtBtn').textContent = `(${amtStr})`;
+    document.getElementById('esewaAmtBtn').textContent  = '(' + amtStr + ')';
+    document.getElementById('khaltiAmtBtn').textContent = '(' + amtStr + ')';
 
-    // Generate QR
     generateQR(amount);
 
-    // Show modal
     const modal = document.getElementById('paymentModal');
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -597,72 +610,69 @@
     document.getElementById('paymentModal').classList.remove('open');
     document.body.style.overflow = '';
   }
+
   document.getElementById('closeModal')?.addEventListener('click', closePaymentModal);
+
   document.getElementById('doneBtn')?.addEventListener('click', () => {
     closePaymentModal();
-    showToast('✓ Thank you for your generous donation! ❤️');
-  });
-  document.getElementById('paymentModal')?.addEventListener('click', e => {
-    if (e.target === document.getElementById('paymentModal')) closePaymentModal();
-  });
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closePaymentModal();
-  });
-
-  /* ── Form submit → open modal ── */
-  document.getElementById('donateForm')?.addEventListener('submit', e => {
-    e.preventDefault();
-    const amt     = getAmount();
-    const purpose = document.getElementById('donorPurpose')?.value || 'General Fund';
-    if (!amt || amt < 1) {
-      showToast('Please enter a valid amount.', 'error');
-      return;
-    }
-    openPaymentModal(amt, purpose);
+    showPayToast('✓ Thank you for your generous donation! ❤️');
+    document.getElementById('donateForm')?.reset();
+    // reset amount selector back to first
+    document.querySelectorAll('.donate-amt').forEach((b, i) => b.classList.toggle('active', i === 0));
+    document.getElementById('customAmtWrap')?.classList.add('hidden');
+    selectedAmount = 500;
   });
 
-  /* ── eSewa redirect ── */
+  /* Click outside modal box to close */
+  document.getElementById('paymentModal')?.addEventListener('click', function(e) {
+    if (e.target === this) closePaymentModal();
+  });
+
+  /* ── eSewa ── */
   function openESewa() {
-    const amt = selectedAmount;
-    // eSewa personal send money deep-link
-    // For real merchant integration, use eSewa payment gateway API
-    const url = `https://esewa.com.np/#/pay?pa=${ORG_ESEWA_ID}&pn=${encodeURIComponent(ORG_NAME)}&am=${amt}&pid=donation-${Date.now()}`;
-    window.open(url, '_blank', 'noopener');
+    const url = 'https://esewa.com.np/#/pay?pa=' + ORG_ESEWA_ID +
+                '&pn=' + encodeURIComponent(ORG_NAME) +
+                '&am=' + selectedAmount +
+                '&pid=donation-' + Date.now();
+    window.open(url, '_blank', 'noopener,noreferrer');
   }
 
-  /* ── Khalti redirect ── */
+  /* ── Khalti ── */
   function openKhalti() {
-    const amt = selectedAmount;
-    // Khalti personal send money deep-link
-    // For real merchant integration, use Khalti Payment Gateway API
-    const url = `https://khalti.com/pay/?mobile=${ORG_KHALTI_ID}&amount=${amt * 100}&name=${encodeURIComponent(ORG_NAME)}`;
-    window.open(url, '_blank', 'noopener');
+    const url = 'https://khalti.com/pay/?mobile=' + ORG_KHALTI_ID +
+                '&amount=' + (selectedAmount * 100) +
+                '&name=' + encodeURIComponent(ORG_NAME);
+    window.open(url, '_blank', 'noopener,noreferrer');
   }
 
-  /* ── Copy ID helper ── */
+  /* ── Copy ── */
   function copyText(text, type) {
-    navigator.clipboard.writeText(text).then(() => {
-      showToast(`✓ ${type === 'esewa' ? 'eSewa' : 'Khalti'} ID copied!`);
+    navigator.clipboard?.writeText(text).then(() => {
+      showPayToast('✓ ' + (type === 'esewa' ? 'eSewa' : 'Khalti') + ' ID copied!');
     }).catch(() => {
-      // fallback
       const el = document.createElement('textarea');
       el.value = text; document.body.appendChild(el);
       el.select(); document.execCommand('copy');
       document.body.removeChild(el);
-      showToast(`✓ ID copied!`);
+      showPayToast('✓ ID copied!');
     });
   }
 
-  /* ── Toast (in case main.js not loaded yet) ── */
-  function showToast(msg, type = 'success') {
-    const existing = document.querySelector('.pay-toast');
-    if (existing) existing.remove();
+  /* ── Toast (self-contained, z-[200] so above modal) ── */
+  function showPayToast(msg, type) {
+    document.querySelectorAll('.pay-toast').forEach(el => el.remove());
     const t = document.createElement('div');
-    t.className = `pay-toast fixed bottom-24 left-1/2 -translate-x-1/2 z-[200] px-6 py-3 rounded-full text-white text-sm font-semibold shadow-xl transition-all duration-300 ${type === 'success' ? 'bg-green-500' : 'bg-red-500'}`;
+    t.className = 'pay-toast fixed bottom-10 left-1/2 -translate-x-1/2 z-[300] px-6 py-3 rounded-full text-white text-sm font-semibold shadow-2xl ' +
+                  (type === 'error' ? 'bg-red-500' : 'bg-green-500');
     t.textContent = msg;
     document.body.appendChild(t);
-    setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 3200);
+    setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'opacity .3s'; setTimeout(() => t.remove(), 350); }, 3000);
   }
+
+  /* Newsletter form (this page) */
+  document.getElementById('newsletterForm')?.addEventListener('submit', e => {
+    e.preventDefault(); showPayToast('✓ Subscribed to newsletter!'); e.target.reset();
+  });
   </script>
 </body>
 </html>
