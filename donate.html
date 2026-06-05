@@ -4,6 +4,8 @@
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Donate — Hearts United Nepal Org</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- QR library loaded FIRST in head — guaranteed available when modal opens -->
+  <script src="https://cdn.jsdelivr.net/npm/davidshimjs-qrcodejs@0.0.2/qrcode.min.js"></script>
   <link rel="stylesheet" href="css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -408,34 +410,62 @@
       <!-- Two-column layout -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 p-5 sm:p-6">
 
-        <!-- LEFT: QR Code -->
+        <!-- LEFT: Send Money Card -->
         <div class="flex flex-col items-center">
           <p class="text-sm font-bold text-secondary mb-4 flex items-center gap-2">
-            <i class="fa-solid fa-qrcode text-primary"></i> Scan QR to Pay
+            <i class="fa-solid fa-mobile-screen-button text-primary"></i> Send Money Directly
           </p>
-          <div class="relative inline-block">
-            <div class="qr-ring"></div>
-            <div class="bg-white border-2 border-gray-100 rounded-2xl p-3 shadow-lg">
-              <!-- QR rendered as <img> via Google Chart API — always works, no JS library needed -->
-              <img id="qrImg"
-                src=""
-                alt="Payment QR Code"
-                width="200" height="200"
-                style="display:block;border-radius:.5rem;image-rendering:pixelated;"
-              />
+
+          <!-- Main card -->
+          <div class="w-full bg-gradient-to-br from-secondary to-accent rounded-2xl p-5 text-white shadow-xl">
+            <!-- Org name -->
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                <i class="fa-solid fa-heart text-white"></i>
+              </div>
+              <div>
+                <p class="font-bold text-sm">Hearts United Nepal Org</p>
+                <p class="text-white/70 text-xs">Verified Recipient</p>
+              </div>
+            </div>
+
+            <!-- Amount -->
+            <div class="bg-white/15 rounded-xl p-3 mb-4 text-center">
+              <p class="text-xs text-white/70 mb-1">Send Exactly This Amount</p>
+              <p id="sendAmtLabel" class="text-3xl font-extrabold">Rs 500</p>
+              <p class="text-xs text-white/70 mt-1">NPR (Nepali Rupees)</p>
+            </div>
+
+            <!-- Phone number -->
+            <div class="bg-white rounded-xl p-3 text-center">
+              <p class="text-xs text-gray-400 mb-1">Send Money to this Number</p>
+              <p class="text-2xl font-extrabold text-secondary tracking-widest">9819341743</p>
+              <button onclick="copyText('9819341743','number')"
+                class="mt-2 text-xs text-primary font-semibold flex items-center gap-1 mx-auto hover:text-red-700 transition-colors">
+                <i class="fa-regular fa-copy"></i> Copy Number
+              </button>
             </div>
           </div>
-          <p class="text-xs text-gray-400 mt-3 text-center">Scan with eSewa / Khalti / any Nepal banking app</p>
-          <!-- QR amount label -->
-          <div class="mt-3 bg-gray-50 rounded-xl px-4 py-2 text-center">
-            <p class="text-xs text-gray-400">Amount to pay</p>
-            <p id="qrAmtLabel" class="text-xl font-extrabold text-secondary">Rs 500</p>
+
+          <!-- Steps -->
+          <div class="w-full mt-4 space-y-2">
+            <div class="flex items-center gap-2 text-xs text-gray-500">
+              <span class="w-5 h-5 bg-green-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">1</span>
+              Open eSewa or Khalti app
+            </div>
+            <div class="flex items-center gap-2 text-xs text-gray-500">
+              <span class="w-5 h-5 bg-green-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">2</span>
+              Tap <strong class="text-gray-700 mx-1">Send Money</strong> → enter <strong class="text-gray-700 mx-1">9819341743</strong>
+            </div>
+            <div class="flex items-center gap-2 text-xs text-gray-500">
+              <span class="w-5 h-5 bg-green-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">3</span>
+              Enter amount: <strong id="stepsAmt" class="text-primary mx-1">Rs 500</strong> → Confirm
+            </div>
+            <div class="flex items-center gap-2 text-xs text-gray-500">
+              <span class="w-5 h-5 bg-green-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">4</span>
+              Screenshot leu ra <strong class="text-gray-700 mx-1">heartsunitednepalorg@gmail.com</strong> ma pathau
+            </div>
           </div>
-          <!-- Download QR button -->
-          <a id="downloadQR" download="hearts-united-qr.png" href=""
-            class="mt-3 text-xs text-primary hover:text-red-700 flex items-center gap-1.5 font-semibold transition-colors cursor-pointer">
-            <i class="fa-solid fa-download"></i> Download QR
-          </a>
         </div>
 
         <!-- RIGHT: eSewa & Khalti -->
@@ -528,7 +558,9 @@
   };
 
   let selectedAmount = 500;
+  let qrInstance     = null;   // holds QRCode object so we can clear & redraw
 
+  /* ── amount helpers ── */
   function getAmount() {
     const a = document.querySelector('.donate-amt.active');
     if (!a) return 500;
@@ -538,9 +570,9 @@
     }
     return parseInt(a.dataset.amount) || 500;
   }
-
   function fmtNPR(n) { return 'Rs ' + Number(n).toLocaleString('en-IN'); }
 
+  /* amount buttons */
   document.querySelectorAll('.donate-amt').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.donate-amt').forEach(b => b.classList.remove('active'));
@@ -553,37 +585,66 @@
   });
   document.getElementById('customAmt')?.addEventListener('input', () => { selectedAmount = getAmount(); });
 
+  /* ── proceed button ── */
   function handleProceed() {
     const amt = getAmount();
     if (!amt || amt < 1) { showPayToast('Please select or enter a valid amount.', 'error'); return; }
     openPaymentModal(amt, document.getElementById('donorPurpose')?.value || 'General Fund');
   }
 
-  /* QR via Google Chart API — returns URL of a real QR image, no JS library needed */
-  function qrSrc(amount) {
-    const data = 'esewa://p2p?amount=' + amount + '&to=' + CFG.esewa_id + '&remarks=Donation+to+Hearts+United+Nepal';
-    return 'https://chart.googleapis.com/chart?cht=qr&chs=200x200&choe=UTF-8&chld=M|2&chl=' + encodeURIComponent(data);
+  /* ── draw QR using qrcodejs (loaded in <head>) ── */
+  function drawQR(amount) {
+    const div = document.getElementById('qrDiv');
+    if (!div) return;
+
+    /* clear previous */
+    div.innerHTML = '';
+    qrInstance = null;
+
+    if (typeof QRCode === 'undefined') {
+      div.innerHTML = '<p style="font-size:.8rem;color:#6b7280;text-align:center;padding:1rem;">eSewa / Khalti<br><strong>' + CFG.esewa_id + '</strong><br>Rs ' + amount + '</p>';
+      return;
+    }
+
+    /* eSewa deep-link — scanning opens eSewa with amount prefilled */
+    const data =
+      'esewa://p2p?amount=' + amount +
+      '&to=' + CFG.esewa_id +
+      '&remarks=Donation+to+Hearts+United+Nepal';
+
+    qrInstance = new QRCode(div, {
+      text          : data,
+      width         : 200,
+      height        : 200,
+      colorDark     : '#000000',
+      colorLight    : '#ffffff',
+      correctLevel  : QRCode.CorrectLevel.M
+    });
   }
 
-  function setQR(amount) {
-    const img = document.getElementById('qrImg');
-    const dl  = document.getElementById('downloadQR');
-    if (!img) return;
-    const src = qrSrc(amount);
-    img.src = src;
-    img.style.display = 'block';
-    if (dl) { dl.href = src; dl.download = 'donation-qr-rs' + amount + '.png'; }
+  /* ── download QR ── */
+  function downloadQR() {
+    const canvas = document.querySelector('#qrDiv canvas');
+    const img    = document.querySelector('#qrDiv img');
+    let src = null;
+    if (canvas) src = canvas.toDataURL('image/png');
+    else if (img) src = img.src;
+    if (!src) { showPayToast('QR not ready yet.', 'error'); return; }
+    const a = document.createElement('a');
+    a.href = src; a.download = 'donation-qr-rs' + selectedAmount + '.png';
+    a.click();
   }
 
+  /* ── modal ── */
   function openPaymentModal(amount, purpose) {
     selectedAmount = amount;
     const s = fmtNPR(amount);
     document.getElementById('modalAmount').textContent  = s;
     document.getElementById('modalPurpose').textContent = purpose;
-    document.getElementById('qrAmtLabel').textContent   = s;
+    document.getElementById('sendAmtLabel').textContent = s;
+    document.getElementById('stepsAmt').textContent     = s;
     document.getElementById('esewaAmtBtn').textContent  = '(' + s + ')';
     document.getElementById('khaltiAmtBtn').textContent = '(' + s + ')';
-    setQR(amount);
     document.getElementById('paymentModal').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
@@ -594,34 +655,55 @@
   }
 
   document.getElementById('closeModal')?.addEventListener('click', closePaymentModal);
-  document.getElementById('paymentModal')?.addEventListener('click', function(e) { if (e.target===this) closePaymentModal(); });
+  document.getElementById('paymentModal')?.addEventListener('click', function(e) {
+    if (e.target === this) closePaymentModal();
+  });
   document.getElementById('doneBtn')?.addEventListener('click', () => {
     closePaymentModal();
-    showPayToast('Thank you for your generous donation!');
+    showPayToast('Thank you for your generous donation! Heart');
     document.getElementById('donateForm')?.reset();
     document.querySelectorAll('.donate-amt').forEach((b,i) => b.classList.toggle('active', i===0));
     document.getElementById('customAmtWrap')?.classList.add('hidden');
     selectedAmount = 500;
   });
 
+  /* ── eSewa ── */
   function openESewa() {
-    window.open('https://esewa.com.np/#/pay?pa=' + CFG.esewa_id + '&pn=' + encodeURIComponent(CFG.org_name) + '&am=' + selectedAmount + '&pid=HUN-' + Date.now(), '_blank', 'noopener');
+    window.open(
+      'https://esewa.com.np/#/pay?pa=' + CFG.esewa_id +
+      '&pn=' + encodeURIComponent(CFG.org_name) +
+      '&am=' + selectedAmount +
+      '&pid=HUN-' + Date.now(),
+      '_blank', 'noopener'
+    );
   }
+
+  /* ── Khalti ── */
   function openKhalti() {
-    window.open('https://khalti.com/#/pay?mobile=' + CFG.khalti_id + '&amount=' + (selectedAmount*100) + '&product_name=' + encodeURIComponent('Donation-'+CFG.org_name), '_blank', 'noopener');
+    window.open(
+      'https://khalti.com/#/pay?mobile=' + CFG.khalti_id +
+      '&amount=' + (selectedAmount * 100) +
+      '&product_name=' + encodeURIComponent('Donation-' + CFG.org_name),
+      '_blank', 'noopener'
+    );
   }
 
+  /* ── copy ── */
   function copyText(text, type) {
-    const label = type==='esewa' ? 'eSewa' : 'Khalti';
-    navigator.clipboard?.writeText(text).then(() => showPayToast(label+' ID copied!')).catch(() => {
-      const el = document.createElement('textarea');
-      el.value=text; el.style.cssText='position:fixed;opacity:0;';
-      document.body.appendChild(el); el.select();
-      try { document.execCommand('copy'); showPayToast(label+' ID copied!'); } catch(e){}
-      document.body.removeChild(el);
-    });
+    const label = type === 'esewa' ? 'eSewa' : 'Khalti';
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(text).then(() => showPayToast(label + ' ID copied!')).catch(() => fbCopy(text, label));
+    } else { fbCopy(text, label); }
+  }
+  function fbCopy(text, label) {
+    const el = document.createElement('textarea');
+    el.value = text; el.style.cssText = 'position:fixed;opacity:0;';
+    document.body.appendChild(el); el.select();
+    try { document.execCommand('copy'); showPayToast(label + ' ID copied!'); } catch(e){}
+    document.body.removeChild(el);
   }
 
+  /* ── toast ── */
   function showPayToast(msg, type) {
     document.querySelectorAll('.pay-toast').forEach(el => el.remove());
     const t = document.createElement('div');
@@ -631,7 +713,9 @@
     setTimeout(() => { t.style.transition='opacity .3s'; t.style.opacity='0'; setTimeout(()=>t.remove(),350); }, 3000);
   }
 
-  document.getElementById('newsletterForm')?.addEventListener('submit', e => { e.preventDefault(); showPayToast('Subscribed to newsletter!'); e.target.reset(); });
+  document.getElementById('newsletterForm')?.addEventListener('submit', e => {
+    e.preventDefault(); showPayToast('Subscribed to newsletter!'); e.target.reset();
+  });
   </script>
 </body>
 </html>
