@@ -176,62 +176,78 @@
 
   <!-- TIMELINE -->
   <section class="py-20 bg-white">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-14">
         <span class="section-badge">Our Journey</span>
         <h2 class="section-title">Our Milestones</h2>
         <p class="section-subtitle">From humble beginnings to a growing movement — our journey of impact over the years.</p>
       </div>
-      <div class="relative">
-        <div class="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-0.5 bg-gray-200 hidden sm:block"></div>
-        <div class="space-y-10">
-          <!-- Item -->
-          <div class="flex flex-col sm:flex-row items-start gap-6 reveal-item">
-            <div class="sm:w-1/2 sm:text-right sm:pr-10">
-              <span class="inline-block bg-primary text-white text-sm font-bold px-3 py-1 rounded-full mb-2">2026</span>
-              <h3 class="font-bold text-secondary text-lg">Organization Founded</h3>
-              <p class="text-gray-500 text-sm mt-1">Hearts United Nepal Org was established with a small team of passionate volunteers in Kathmandu.</p>
-            </div>
-            <div class="sm:w-8 sm:h-8 w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0 sm:mx-auto z-10"><i class="fa-solid fa-flag text-white text-xs"></i></div>
-            <div class="sm:w-1/2 sm:pl-10 hidden sm:block"></div>
+
+      <!-- Mobile-first vertical timeline — works on ALL screen sizes -->
+      <div class="relative pl-8 sm:pl-12">
+        <!-- Vertical line -->
+        <div class="absolute left-3 sm:left-5 top-0 bottom-0 w-0.5 bg-gray-200"></div>
+
+        <!-- Item 1 -->
+        <div class="relative mb-10 reveal-item">
+          <div class="absolute -left-8 sm:-left-12 w-8 h-8 sm:w-10 sm:h-10 bg-primary rounded-full flex items-center justify-center shadow-md">
+            <i class="fa-solid fa-flag text-white text-xs"></i>
           </div>
-          <div class="flex flex-col sm:flex-row items-start gap-6 reveal-item">
-            <div class="sm:w-1/2 sm:text-right sm:pr-10 hidden sm:block"></div>
-            <div class="sm:w-8 sm:h-8 w-8 h-8 bg-secondary rounded-full flex items-center justify-center flex-shrink-0 sm:mx-auto z-10"><i class="fa-solid fa-graduation-cap text-white text-xs"></i></div>
-            <div class="sm:w-1/2 sm:pl-10">
-              <span class="inline-block bg-secondary text-white text-sm font-bold px-3 py-1 rounded-full mb-2">2026</span>
-              <h3 class="font-bold text-secondary text-lg">First Education Drive</h3>
-              <p class="text-gray-500 text-sm mt-1">Distributed 500 school kits to underprivileged students in Sindhupalchok district.</p>
-            </div>
-          </div>
-          <div class="flex flex-col sm:flex-row items-start gap-6 reveal-item">
-            <div class="sm:w-1/2 sm:text-right sm:pr-10">
-              <span class="inline-block bg-primary text-white text-sm font-bold px-3 py-1 rounded-full mb-2">2026</span>
-              <h3 class="font-bold text-secondary text-lg">First Medical Camp</h3>
-              <p class="text-gray-500 text-sm mt-1">Organized free medical camp serving 800+ patients in remote communities of Dolakha.</p>
-            </div>
-            <div class="sm:w-8 sm:h-8 w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0 sm:mx-auto z-10"><i class="fa-solid fa-stethoscope text-white text-xs"></i></div>
-            <div class="sm:w-1/2 sm:pl-10 hidden sm:block"></div>
-          </div>
-          <div class="flex flex-col sm:flex-row items-start gap-6 reveal-item">
-            <div class="sm:w-1/2 sm:text-right sm:pr-10 hidden sm:block"></div>
-            <div class="sm:w-8 sm:h-8 w-8 h-8 bg-secondary rounded-full flex items-center justify-center flex-shrink-0 sm:mx-auto z-10"><i class="fa-solid fa-people-group text-white text-xs"></i></div>
-            <div class="sm:w-1/2 sm:pl-10">
-              <span class="inline-block bg-secondary text-white text-sm font-bold px-3 py-1 rounded-full mb-2">2026</span>
-              <h3 class="font-bold text-secondary text-lg">100+ Volunteers</h3>
-              <p class="text-gray-500 text-sm mt-1">Reached a milestone of 100 registered volunteers across 8 districts of Nepal.</p>
-            </div>
-          </div>
-          <div class="flex flex-col sm:flex-row items-start gap-6 reveal-item">
-            <div class="sm:w-1/2 sm:text-right sm:pr-10">
-              <span class="inline-block bg-primary text-white text-sm font-bold px-3 py-1 rounded-full mb-2">2026</span>
-              <h3 class="font-bold text-secondary text-lg">5,000 Lives Impacted</h3>
-              <p class="text-gray-500 text-sm mt-1">Celebrated reaching 5,000+ lives impacted across 12 districts with 45+ completed projects.</p>
-            </div>
-            <div class="sm:w-8 sm:h-8 w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0 sm:mx-auto z-10"><i class="fa-solid fa-star text-white text-xs"></i></div>
-            <div class="sm:w-1/2 sm:pl-10 hidden sm:block"></div>
+          <div class="bg-gray-50 rounded-2xl p-5 border border-gray-100 hover:border-primary hover:shadow-md transition-all">
+            <span class="inline-block bg-primary text-white text-xs font-bold px-3 py-1 rounded-full mb-2">2016</span>
+            <h3 class="font-bold text-secondary text-lg">Organization Founded</h3>
+            <p class="text-gray-500 text-sm mt-1 leading-relaxed">Hearts United Nepal Org was established with a small team of passionate volunteers in Kathmandu.</p>
           </div>
         </div>
+
+        <!-- Item 2 -->
+        <div class="relative mb-10 reveal-item">
+          <div class="absolute -left-8 sm:-left-12 w-8 h-8 sm:w-10 sm:h-10 bg-secondary rounded-full flex items-center justify-center shadow-md">
+            <i class="fa-solid fa-graduation-cap text-white text-xs"></i>
+          </div>
+          <div class="bg-gray-50 rounded-2xl p-5 border border-gray-100 hover:border-secondary hover:shadow-md transition-all">
+            <span class="inline-block bg-secondary text-white text-xs font-bold px-3 py-1 rounded-full mb-2">2017</span>
+            <h3 class="font-bold text-secondary text-lg">First Education Drive</h3>
+            <p class="text-gray-500 text-sm mt-1 leading-relaxed">Distributed 500 school kits to underprivileged students in Sindhupalchok district.</p>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="relative mb-10 reveal-item">
+          <div class="absolute -left-8 sm:-left-12 w-8 h-8 sm:w-10 sm:h-10 bg-primary rounded-full flex items-center justify-center shadow-md">
+            <i class="fa-solid fa-stethoscope text-white text-xs"></i>
+          </div>
+          <div class="bg-gray-50 rounded-2xl p-5 border border-gray-100 hover:border-primary hover:shadow-md transition-all">
+            <span class="inline-block bg-primary text-white text-xs font-bold px-3 py-1 rounded-full mb-2">2019</span>
+            <h3 class="font-bold text-secondary text-lg">First Medical Camp</h3>
+            <p class="text-gray-500 text-sm mt-1 leading-relaxed">Organized free medical camp serving 800+ patients in remote communities of Dolakha.</p>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="relative mb-10 reveal-item">
+          <div class="absolute -left-8 sm:-left-12 w-8 h-8 sm:w-10 sm:h-10 bg-secondary rounded-full flex items-center justify-center shadow-md">
+            <i class="fa-solid fa-people-group text-white text-xs"></i>
+          </div>
+          <div class="bg-gray-50 rounded-2xl p-5 border border-gray-100 hover:border-secondary hover:shadow-md transition-all">
+            <span class="inline-block bg-secondary text-white text-xs font-bold px-3 py-1 rounded-full mb-2">2021</span>
+            <h3 class="font-bold text-secondary text-lg">100+ Volunteers</h3>
+            <p class="text-gray-500 text-sm mt-1 leading-relaxed">Reached a milestone of 100 registered volunteers across 8 districts of Nepal.</p>
+          </div>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="relative reveal-item">
+          <div class="absolute -left-8 sm:-left-12 w-8 h-8 sm:w-10 sm:h-10 bg-primary rounded-full flex items-center justify-center shadow-md">
+            <i class="fa-solid fa-star text-white text-xs"></i>
+          </div>
+          <div class="bg-gray-50 rounded-2xl p-5 border border-gray-100 hover:border-primary hover:shadow-md transition-all">
+            <span class="inline-block bg-primary text-white text-xs font-bold px-3 py-1 rounded-full mb-2">2024</span>
+            <h3 class="font-bold text-secondary text-lg">5,000 Lives Impacted</h3>
+            <p class="text-gray-500 text-sm mt-1 leading-relaxed">Celebrated reaching 5,000+ lives impacted across 12 districts with 45+ completed projects.</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
