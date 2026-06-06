@@ -2,6 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ═══ SEO META TAGS ═══ -->
+  <meta name="description" content="Donate to Hearts United Nepal Org via eSewa or Khalti. Your contribution funds education, healthcare, food support and disaster relief across Nepal." />
+  <meta name="keywords"    content="donate Nepal NGO, donate eSewa Nepal, donate Khalti Nepal, charity donation Nepal, Hearts United Nepal donate" />
+  <meta name="author"      content="Hearts United Nepal Org" />
+  <meta name="robots"      content="index, follow" />
+  <link rel="canonical"    href="https://heartsunitednepalorg.com/donate" />
+
+  <!-- Open Graph (Facebook / Social) -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://heartsunitednepalorg.com/donate" />
+  <meta property="og:title"       content="Make a Donation — Hearts United Nepal Org" />
+  <meta property="og:description" content="Donate to Hearts United Nepal Org via eSewa or Khalti. Your contribution funds education, healthcare, food support and disaster relief across Nepal." />
+  <meta property="og:image"       content="https://heartsunitednepalorg.com/image/logo.png" />
+  <meta property="og:site_name"   content="Hearts United Nepal Org" />
+  <meta property="og:locale"      content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Make a Donation — Hearts United Nepal Org" />
+  <meta name="twitter:description" content="Donate to Hearts United Nepal Org via eSewa or Khalti. Your contribution funds education, healthcare, food support and disaster relief across Nepal." />
+  <meta name="twitter:image"       content="https://heartsunitednepalorg.com/image/logo.png" />
+
+  <!-- PWA / App -->
+  <link rel="manifest"     href="/manifest.json" />
+  <meta name="theme-color" content="#e63946" />
+  <link rel="icon"         href="/image/logo.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/image/logo.png" />
+  <!-- ═══════════════════════ -->
   <title>Donate — Hearts United Nepal Org</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- QR library loaded FIRST in head — guaranteed available when modal opens -->
@@ -110,7 +138,7 @@
   <nav id="navbar" class="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16 lg:h-20">
-        <a href="index.html" class="flex items-center gap-3 group">
+        <a href="/" class="flex items-center gap-3 group">
           <div class="w-10 h-10 lg:w-12 lg:h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
             <img class="logo-img w-full h-full object-contain" src="./image/logo.png" alt="logo" />
           </div>
@@ -120,15 +148,15 @@
           </div>
         </a>
         <ul class="hidden lg:flex items-center gap-1">
-          <li><a href="index.html"     class="nav-link">Home</a></li>
-          <li><a href="about.html"     class="nav-link">About Us</a></li>
-          <li><a href="programs.html"  class="nav-link">Programs</a></li>
-          <li><a href="gallery.html"   class="nav-link">Gallery</a></li>
-          <li><a href="team.html"      class="nav-link">Our Team</a></li>
-          <li><a href="volunteer.html" class="nav-link">Volunteer</a></li>
-          <li><a href="contact.html"   class="nav-link">Contact</a></li>
+          <li><a href="/"     class="nav-link">Home</a></li>
+          <li><a href="/about"     class="nav-link">About Us</a></li>
+          <li><a href="/programs"  class="nav-link">Programs</a></li>
+          <li><a href="/gallery"   class="nav-link">Gallery</a></li>
+          <li><a href="/team"      class="nav-link">Our Team</a></li>
+          <li><a href="/volunteer" class="nav-link">Volunteer</a></li>
+          <li><a href="/contact"   class="nav-link">Contact</a></li>
         </ul>
-        <a href="donate.html" class="hidden lg:flex items-center gap-2 bg-primary hover:bg-red-700 text-white font-semibold px-5 py-2.5 rounded-full transition-all shadow-md hover:-translate-y-0.5 text-sm">
+        <a href="/donate" class="hidden lg:flex items-center gap-2 bg-primary hover:bg-red-700 text-white font-semibold px-5 py-2.5 rounded-full transition-all shadow-md hover:-translate-y-0.5 text-sm">
           <i class="fa-solid fa-heart-pulse"></i> Donate Now
         </a>
         <button id="menuBtn" class="lg:hidden flex flex-col gap-1.5 p-2 rounded-lg hover:bg-gray-100 transition-colors">
@@ -149,16 +177,16 @@
       <button id="closeCanvas" class="w-9 h-9 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 text-white transition-colors"><i class="fa-solid fa-xmark text-lg"></i></button>
     </div>
     <nav class="flex-1 overflow-y-auto py-4 px-4"><ul class="space-y-1">
-      <li><a href="index.html"     class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-house w-5"></i> Home</a></li>
-      <li><a href="about.html"     class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-circle-info w-5"></i> About Us</a></li>
-      <li><a href="programs.html"  class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-hands-holding-child w-5"></i> Programs</a></li>
-      <li><a href="gallery.html"   class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-images w-5"></i> Gallery</a></li>
-      <li><a href="team.html"      class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-people-group w-5"></i> Our Team</a></li>
-      <li><a href="volunteer.html" class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-hand-holding-heart w-5"></i> Volunteer</a></li>
-      <li><a href="contact.html"   class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-envelope w-5"></i> Contact</a></li>
+      <li><a href="/"     class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-house w-5"></i> Home</a></li>
+      <li><a href="/about"     class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-circle-info w-5"></i> About Us</a></li>
+      <li><a href="/programs"  class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-hands-holding-child w-5"></i> Programs</a></li>
+      <li><a href="/gallery"   class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-images w-5"></i> Gallery</a></li>
+      <li><a href="/team"      class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-people-group w-5"></i> Our Team</a></li>
+      <li><a href="/volunteer" class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-hand-holding-heart w-5"></i> Volunteer</a></li>
+      <li><a href="/contact"   class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-envelope w-5"></i> Contact</a></li>
     </ul></nav>
     <div class="p-4 border-t">
-      <a href="donate.html" onclick="closeCanvas()" class="flex items-center justify-center gap-2 w-full bg-primary hover:bg-red-700 text-white font-semibold py-3 rounded-full transition-all">
+      <a href="/donate" onclick="closeCanvas()" class="flex items-center justify-center gap-2 w-full bg-primary hover:bg-red-700 text-white font-semibold py-3 rounded-full transition-all">
         <i class="fa-solid fa-heart-pulse"></i> Donate Now
       </a>
       <div class="flex justify-center gap-3 mt-4">
@@ -177,7 +205,7 @@
       <span class="page-hero-badge">Support Us</span>
       <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mt-2 mb-4">Make a Donation</h1>
       <p class="text-white/80 text-base sm:text-lg max-w-xl mx-auto">Your generous donation directly funds our programs and helps us reach more communities across Nepal.</p>
-      <div class="breadcrumb mt-4"><a href="index.html">Home</a><i class="fa-solid fa-chevron-right text-xs"></i><span class="text-white">Donate</span></div>
+      <div class="breadcrumb mt-4"><a href="/">Home</a><i class="fa-solid fa-chevron-right text-xs"></i><span class="text-white">Donate</span></div>
     </div>
   </div>
 
@@ -309,7 +337,7 @@
           <i class="fa-solid fa-hand-holding-heart text-primary text-3xl mb-3"></i>
           <h3 class="font-bold text-secondary mb-2">Volunteer</h3>
           <p class="text-gray-500 text-sm mb-4">Give your time and skills to our programs.</p>
-          <a href="volunteer.html" class="btn-outline text-sm px-5 py-2">Join Now</a>
+          <a href="/volunteer" class="btn-outline text-sm px-5 py-2">Join Now</a>
         </div>
         <div class="feature-card p-6 reveal-item text-center">
           <i class="fa-solid fa-share-nodes text-secondary text-3xl mb-3"></i>
@@ -325,7 +353,7 @@
           <i class="fa-solid fa-handshake text-green-600 text-3xl mb-3"></i>
           <h3 class="font-bold text-secondary mb-2">Partner With Us</h3>
           <p class="text-gray-500 text-sm mb-4">Organizations can partner for greater impact.</p>
-          <a href="contact.html" class="btn-outline text-sm px-5 py-2">Contact Us</a>
+          <a href="/contact" class="btn-outline text-sm px-5 py-2">Contact Us</a>
         </div>
       </div>
     </div>
@@ -348,8 +376,8 @@
             <a href="#" class="social-btn bg-green-600"><i class="fab fa-whatsapp text-sm"></i></a>
           </div>
         </div>
-        <div><h4 class="font-bold text-lg mb-4 text-light">Quick Links</h4><ul class="space-y-2"><li><a href="index.html" class="footer-link">Home</a></li><li><a href="about.html" class="footer-link">About Us</a></li><li><a href="programs.html" class="footer-link">Programs</a></li><li><a href="gallery.html" class="footer-link">Gallery</a></li><li><a href="volunteer.html" class="footer-link">Volunteer</a></li><li><a href="donate.html" class="footer-link">Donate</a></li></ul></div>
-        <div><h4 class="font-bold text-lg mb-4 text-light">Our Programs</h4><ul class="space-y-2"><li><a href="programs.html" class="footer-link">Education Support</a></li><li><a href="programs.html" class="footer-link">Medical Camps</a></li><li><a href="programs.html" class="footer-link">Food & Nutrition</a></li><li><a href="programs.html" class="footer-link">Disaster Relief</a></li><li><a href="programs.html" class="footer-link">Women Empowerment</a></li></ul></div>
+        <div><h4 class="font-bold text-lg mb-4 text-light">Quick Links</h4><ul class="space-y-2"><li><a href="/" class="footer-link">Home</a></li><li><a href="/about" class="footer-link">About Us</a></li><li><a href="/programs" class="footer-link">Programs</a></li><li><a href="/gallery" class="footer-link">Gallery</a></li><li><a href="/volunteer" class="footer-link">Volunteer</a></li><li><a href="/donate" class="footer-link">Donate</a></li></ul></div>
+        <div><h4 class="font-bold text-lg mb-4 text-light">Our Programs</h4><ul class="space-y-2"><li><a href="/programs" class="footer-link">Education Support</a></li><li><a href="/programs" class="footer-link">Medical Camps</a></li><li><a href="/programs" class="footer-link">Food & Nutrition</a></li><li><a href="/programs" class="footer-link">Disaster Relief</a></li><li><a href="/programs" class="footer-link">Women Empowerment</a></li></ul></div>
         <div>
           <h4 class="font-bold text-lg mb-4 text-light">Newsletter</h4>
           <p class="text-white/60 text-sm mb-4">Stay updated with our latest news.</p>
@@ -410,62 +438,29 @@
       <!-- Two-column layout -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 p-5 sm:p-6">
 
-        <!-- LEFT: Send Money Card -->
+        <!-- LEFT: QR Code -->
         <div class="flex flex-col items-center">
           <p class="text-sm font-bold text-secondary mb-4 flex items-center gap-2">
-            <i class="fa-solid fa-mobile-screen-button text-primary"></i> Send Money Directly
+            <i class="fa-solid fa-qrcode text-primary"></i> Scan QR to Pay
           </p>
-
-          <!-- Main card -->
-          <div class="w-full bg-gradient-to-br from-secondary to-accent rounded-2xl p-5 text-white shadow-xl">
-            <!-- Org name -->
-            <div class="flex items-center gap-3 mb-4">
-              <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                <i class="fa-solid fa-heart text-white"></i>
-              </div>
-              <div>
-                <p class="font-bold text-sm">Hearts United Nepal Org</p>
-                <p class="text-white/70 text-xs">Verified Recipient</p>
-              </div>
-            </div>
-
-            <!-- Amount -->
-            <div class="bg-white/15 rounded-xl p-3 mb-4 text-center">
-              <p class="text-xs text-white/70 mb-1">Send Exactly This Amount</p>
-              <p id="sendAmtLabel" class="text-3xl font-extrabold">Rs 500</p>
-              <p class="text-xs text-white/70 mt-1">NPR (Nepali Rupees)</p>
-            </div>
-
-            <!-- Phone number -->
-            <div class="bg-white rounded-xl p-3 text-center">
-              <p class="text-xs text-gray-400 mb-1">Send Money to this Number</p>
-              <p class="text-2xl font-extrabold text-secondary tracking-widest">9819341743</p>
-              <button onclick="copyText('9819341743','number')"
-                class="mt-2 text-xs text-primary font-semibold flex items-center gap-1 mx-auto hover:text-red-700 transition-colors">
-                <i class="fa-regular fa-copy"></i> Copy Number
-              </button>
+          <div class="relative inline-block">
+            <div class="qr-ring"></div>
+            <div class="bg-white border-2 border-gray-100 rounded-2xl p-3 shadow-lg">
+              <!-- QR rendered here by qrcodejs library -->
+              <div id="qrDiv" style="width:200px;height:200px;display:flex;align-items:center;justify-content:center;"></div>
             </div>
           </div>
-
-          <!-- Steps -->
-          <div class="w-full mt-4 space-y-2">
-            <div class="flex items-center gap-2 text-xs text-gray-500">
-              <span class="w-5 h-5 bg-green-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">1</span>
-              Open eSewa or Khalti app
-            </div>
-            <div class="flex items-center gap-2 text-xs text-gray-500">
-              <span class="w-5 h-5 bg-green-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">2</span>
-              Tap <strong class="text-gray-700 mx-1">Send Money</strong> → enter <strong class="text-gray-700 mx-1">9819341743</strong>
-            </div>
-            <div class="flex items-center gap-2 text-xs text-gray-500">
-              <span class="w-5 h-5 bg-green-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">3</span>
-              Enter amount: <strong id="stepsAmt" class="text-primary mx-1">Rs 500</strong> → Confirm
-            </div>
-            <div class="flex items-center gap-2 text-xs text-gray-500">
-              <span class="w-5 h-5 bg-green-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">4</span>
-              Screenshot leu ra <strong class="text-gray-700 mx-1">heartsunitednepalorg@gmail.com</strong> ma pathau
-            </div>
+          <p class="text-xs text-gray-400 mt-3 text-center">Scan with eSewa / Khalti / any Nepal banking app</p>
+          <!-- QR amount label -->
+          <div class="mt-3 bg-gray-50 rounded-xl px-4 py-2 text-center">
+            <p class="text-xs text-gray-400">Amount to pay</p>
+            <p id="qrAmtLabel" class="text-xl font-extrabold text-secondary">Rs 500</p>
           </div>
+          <!-- Download QR button -->
+          <button id="downloadQR" onclick="downloadQR()"
+            class="mt-3 text-xs text-primary hover:text-red-700 flex items-center gap-1.5 font-semibold transition-colors cursor-pointer">
+            <i class="fa-solid fa-download"></i> Download QR
+          </button>
         </div>
 
         <!-- RIGHT: eSewa & Khalti -->
@@ -641,12 +636,14 @@
     const s = fmtNPR(amount);
     document.getElementById('modalAmount').textContent  = s;
     document.getElementById('modalPurpose').textContent = purpose;
-    document.getElementById('sendAmtLabel').textContent = s;
-    document.getElementById('stepsAmt').textContent     = s;
+    document.getElementById('qrAmtLabel').textContent   = s;
     document.getElementById('esewaAmtBtn').textContent  = '(' + s + ')';
     document.getElementById('khaltiAmtBtn').textContent = '(' + s + ')';
+
+    /* show modal first so div has dimensions, then draw QR */
     document.getElementById('paymentModal').classList.add('open');
     document.body.style.overflow = 'hidden';
+    setTimeout(() => drawQR(amount), 50);   /* tiny delay ensures div is visible */
   }
 
   function closePaymentModal() {

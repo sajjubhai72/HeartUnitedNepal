@@ -1,7 +1,35 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ═══ SEO META TAGS ═══ -->
+  <meta name="description" content="Get in touch with Hearts United Nepal Org. Contact us for partnerships, donations, volunteering, or any queries. Based in Kathmandu, Nepal." />
+  <meta name="keywords"    content="contact Hearts United Nepal, Nepal NGO contact, partnership Nepal NGO, Kathmandu charity contact" />
+  <meta name="author"      content="Hearts United Nepal Org" />
+  <meta name="robots"      content="index, follow" />
+  <link rel="canonical"    href="https://heartsunitednepalorg.com/contact" />
+
+  <!-- Open Graph (Facebook / Social) -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://heartsunitednepalorg.com/contact" />
+  <meta property="og:title"       content="Contact Us — Hearts United Nepal Org" />
+  <meta property="og:description" content="Get in touch with Hearts United Nepal Org. Contact us for partnerships, donations, volunteering, or any queries. Based in Kathmandu, Nepal." />
+  <meta property="og:image"       content="https://heartsunitednepalorg.com/image/logo.png" />
+  <meta property="og:site_name"   content="Hearts United Nepal Org" />
+  <meta property="og:locale"      content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Contact Us — Hearts United Nepal Org" />
+  <meta name="twitter:description" content="Get in touch with Hearts United Nepal Org. Contact us for partnerships, donations, volunteering, or any queries. Based in Kathmandu, Nepal." />
+  <meta name="twitter:image"       content="https://heartsunitednepalorg.com/image/logo.png" />
+
+  <!-- PWA / App -->
+  <link rel="manifest"     href="/manifest.json" />
+  <meta name="theme-color" content="#e63946" />
+  <link rel="icon"         href="/image/logo.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/image/logo.png" />
+  <!-- ═══════════════════════ -->
   <title>Contact Us — Hearts United Nepal Org</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="css/style.css" />
@@ -15,17 +43,17 @@
   <nav id="navbar" class="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16 lg:h-20">
-        <a href="index.html" class="flex items-center gap-3 group"><div class="w-10 h-10 lg:w-12 lg:h-12 flex items-center justify-center group-hover:scale-110 transition-transform"><img class="logo-img w-full h-full object-contain" src="./image/logo.png" alt="logo" /></div><div class="leading-tight"><span class="block text-base lg:text-lg font-bold text-secondary">Hearts United</span><span class="block text-xs text-primary font-medium tracking-wide">Nepal Org</span></div></a>
+        <a href="/" class="flex items-center gap-3 group"><div class="w-10 h-10 lg:w-12 lg:h-12 flex items-center justify-center group-hover:scale-110 transition-transform"><img class="logo-img w-full h-full object-contain" src="./image/logo.png" alt="logo" /></div><div class="leading-tight"><span class="block text-base lg:text-lg font-bold text-secondary">Hearts United</span><span class="block text-xs text-primary font-medium tracking-wide">Nepal Org</span></div></a>
         <ul class="hidden lg:flex items-center gap-1">
-          <li><a href="index.html"     class="nav-link">Home</a></li>
-          <li><a href="about.html"     class="nav-link">About Us</a></li>
-          <li><a href="programs.html"  class="nav-link">Programs</a></li>
-          <li><a href="gallery.html"   class="nav-link">Gallery</a></li>
-          <li><a href="team.html"      class="nav-link">Our Team</a></li>
-          <li><a href="volunteer.html" class="nav-link">Volunteer</a></li>
-          <li><a href="contact.html"   class="nav-link">Contact</a></li>
+          <li><a href="/"     class="nav-link">Home</a></li>
+          <li><a href="/about"     class="nav-link">About Us</a></li>
+          <li><a href="/programs"  class="nav-link">Programs</a></li>
+          <li><a href="/gallery"   class="nav-link">Gallery</a></li>
+          <li><a href="/team"      class="nav-link">Our Team</a></li>
+          <li><a href="/volunteer" class="nav-link">Volunteer</a></li>
+          <li><a href="/contact"   class="nav-link">Contact</a></li>
         </ul>
-        <a href="donate.html" class="hidden lg:flex items-center gap-2 bg-primary hover:bg-red-700 text-white font-semibold px-5 py-2.5 rounded-full transition-all shadow-md hover:-translate-y-0.5 text-sm"><i class="fa-solid fa-heart-pulse"></i> Donate Now</a>
+        <a href="/donate" class="hidden lg:flex items-center gap-2 bg-primary hover:bg-red-700 text-white font-semibold px-5 py-2.5 rounded-full transition-all shadow-md hover:-translate-y-0.5 text-sm"><i class="fa-solid fa-heart-pulse"></i> Donate Now</a>
         <button id="menuBtn" class="lg:hidden flex flex-col gap-1.5 p-2 rounded-lg hover:bg-gray-100 transition-colors"><span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span></button>
       </div>
     </div>
@@ -34,15 +62,15 @@
   <aside id="mobileCanvas" class="fixed top-0 right-0 h-full w-72 sm:w-80 bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden flex flex-col">
     <div class="flex items-center justify-between p-5 border-b bg-gradient-to-r from-secondary to-accent"><div class="flex items-center gap-3"><div class="w-10 h-10 flex items-center justify-center"><img class="canvas-logo-img w-full h-full object-contain" src="./image/logo.png" alt="logo" /></div><div><span class="block text-sm font-bold text-white">Hearts United</span><span class="block text-xs text-light">Nepal Org</span></div></div><button id="closeCanvas" class="w-9 h-9 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 text-white transition-colors"><i class="fa-solid fa-xmark text-lg"></i></button></div>
     <nav class="flex-1 overflow-y-auto py-4 px-4"><ul class="space-y-1">
-      <li><a href="index.html"     class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-house w-5"></i> Home</a></li>
-      <li><a href="about.html"     class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-circle-info w-5"></i> About Us</a></li>
-      <li><a href="programs.html"  class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-hands-holding-child w-5"></i> Programs</a></li>
-      <li><a href="gallery.html"   class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-images w-5"></i> Gallery</a></li>
-      <li><a href="team.html"      class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-people-group w-5"></i> Our Team</a></li>
-      <li><a href="volunteer.html" class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-hand-holding-heart w-5"></i> Volunteer</a></li>
-      <li><a href="contact.html"   class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-envelope w-5"></i> Contact</a></li>
+      <li><a href="/"     class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-house w-5"></i> Home</a></li>
+      <li><a href="/about"     class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-circle-info w-5"></i> About Us</a></li>
+      <li><a href="/programs"  class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-hands-holding-child w-5"></i> Programs</a></li>
+      <li><a href="/gallery"   class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-images w-5"></i> Gallery</a></li>
+      <li><a href="/team"      class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-people-group w-5"></i> Our Team</a></li>
+      <li><a href="/volunteer" class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-hand-holding-heart w-5"></i> Volunteer</a></li>
+      <li><a href="/contact"   class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-envelope w-5"></i> Contact</a></li>
     </ul></nav>
-    <div class="p-4 border-t"><a href="donate.html" onclick="closeCanvas()" class="flex items-center justify-center gap-2 w-full bg-primary hover:bg-red-700 text-white font-semibold py-3 rounded-full transition-all"><i class="fa-solid fa-heart-pulse"></i> Donate Now</a><div class="flex justify-center gap-3 mt-4"><a href="#" class="w-9 h-9 rounded-full bg-gray-100 hover:bg-blue-600 hover:text-white flex items-center justify-center text-gray-500 transition-all"><i class="fab fa-facebook-f text-sm"></i></a><a href="#" class="w-9 h-9 rounded-full bg-gray-100 hover:bg-pink-600 hover:text-white flex items-center justify-center text-gray-500 transition-all"><i class="fab fa-instagram text-sm"></i></a><a href="#" class="w-9 h-9 rounded-full bg-gray-100 hover:bg-red-600 hover:text-white flex items-center justify-center text-gray-500 transition-all"><i class="fab fa-youtube text-sm"></i></a></div></div>
+    <div class="p-4 border-t"><a href="/donate" onclick="closeCanvas()" class="flex items-center justify-center gap-2 w-full bg-primary hover:bg-red-700 text-white font-semibold py-3 rounded-full transition-all"><i class="fa-solid fa-heart-pulse"></i> Donate Now</a><div class="flex justify-center gap-3 mt-4"><a href="#" class="w-9 h-9 rounded-full bg-gray-100 hover:bg-blue-600 hover:text-white flex items-center justify-center text-gray-500 transition-all"><i class="fab fa-facebook-f text-sm"></i></a><a href="#" class="w-9 h-9 rounded-full bg-gray-100 hover:bg-pink-600 hover:text-white flex items-center justify-center text-gray-500 transition-all"><i class="fab fa-instagram text-sm"></i></a><a href="#" class="w-9 h-9 rounded-full bg-gray-100 hover:bg-red-600 hover:text-white flex items-center justify-center text-gray-500 transition-all"><i class="fab fa-youtube text-sm"></i></a></div></div>
   </aside>
 
   <!-- PAGE HERO -->
@@ -53,7 +81,7 @@
       <span class="page-hero-badge">Get In Touch</span>
       <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mt-2 mb-4">Contact Us</h1>
       <p class="text-white/80 text-base sm:text-lg max-w-xl mx-auto">Have a question, want to partner with us, or need more information? We'd love to hear from you.</p>
-      <div class="breadcrumb mt-4"><a href="index.html">Home</a><i class="fa-solid fa-chevron-right text-xs"></i><span class="text-white">Contact</span></div>
+      <div class="breadcrumb mt-4"><a href="/">Home</a><i class="fa-solid fa-chevron-right text-xs"></i><span class="text-white">Contact</span></div>
     </div>
   </div>
 
@@ -70,15 +98,15 @@
           </div>
           <div class="contact-info-card reveal-item">
             <div class="contact-icon"><i class="fa-solid fa-location-dot text-primary text-xl"></i></div>
-            <div><h4 class="font-bold text-secondary">Our Office</h4><p class="text-gray-500 text-sm mt-1">Kathmandu, Nepal<br />Ward No. 5, Bagmati Province</p></div>
+            <div><h4 class="font-bold text-secondary">Our Office</h4><p class="text-gray-500 text-sm mt-1">Harinagar, Nepal<br />Ward No. 7, Koshi Province</p></div>
           </div>
           <div class="contact-info-card reveal-item">
             <div class="contact-icon"><i class="fa-solid fa-phone text-primary text-xl"></i></div>
-            <div><h4 class="font-bold text-secondary">Phone</h4><p class="text-gray-500 text-sm mt-1">+977-01-XXXXXXX<br />+977-98XXXXXXXX</p></div>
+            <div><h4 class="font-bold text-secondary">Phone</h4><p class="text-gray-500 text-sm mt-1">+977 9819341743<br /></p></div>
           </div>
           <div class="contact-info-card reveal-item">
             <div class="contact-icon"><i class="fa-solid fa-envelope text-primary text-xl"></i></div>
-            <div><h4 class="font-bold text-secondary">Email</h4><p class="text-gray-500 text-sm mt-1">info@heartsunitednepal.org<br />volunteer@heartsunitednepal.org</p></div>
+            <div><h4 class="font-bold text-secondary">Email</h4><p class="text-gray-500 text-sm mt-1">heartsunitednepalorg@gmail.com<br /></p></div>
           </div>
           <div class="contact-info-card reveal-item">
             <div class="contact-icon"><i class="fa-solid fa-clock text-primary text-xl"></i></div>
@@ -102,7 +130,7 @@
           <p class="text-gray-500 text-sm mb-6">We'll get back to you within 48 hours.</p>
           <form id="contactForm" class="space-y-5">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div><label class="form-label">Your Name *</label><input type="text" class="form-input" placeholder="Ramesh Sharma" required /></div>
+              <div><label class="form-label">Your Name *</label><input type="text" class="form-input" placeholder="Your Name" required /></div>
               <div><label class="form-label">Email Address *</label><input type="email" class="form-input" placeholder="you@example.com" required /></div>
             </div>
             <div><label class="form-label">Phone (Optional)</label><input type="tel" class="form-input" placeholder="+977-98XXXXXXXX" /></div>
@@ -132,9 +160,9 @@
     <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-secondary/10 to-accent/10">
       <div class="text-center">
         <i class="fa-solid fa-map-location-dot text-primary text-5xl mb-3"></i>
-        <p class="font-bold text-secondary text-lg">Kathmandu, Nepal</p>
-        <p class="text-gray-500 text-sm">Ward No. 5, Bagmati Province</p>
-        <a href="https://maps.google.com/?q=Kathmandu,Nepal" target="_blank" rel="noopener" class="mt-3 inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
+        <p class="font-bold text-secondary text-lg">Harinagar, Nepal</p>
+        <p class="text-gray-500 text-sm">Ward No. 7, Koshi Province</p>
+        <a href="https://maps.google.com/?q=ghuskee,Nepal" target="_blank" rel="noopener" class="mt-3 inline-flex items-center gap-2 text-primary font-semibold text-sm hover:underline">
           <i class="fa-solid fa-location-arrow"></i> Open in Google Maps
         </a>
       </div>
@@ -154,14 +182,14 @@
             How can I donate to Hearts United Nepal?
             <i class="fa-solid fa-chevron-down faq-icon transition-transform duration-300"></i>
           </button>
-          <div class="faq-body hidden px-5 pb-5 text-gray-500 text-sm leading-relaxed">You can donate through our <a href="donate.html" class="text-primary font-semibold">Donate page</a>. We accept direct bank transfers and online payments. All donations are acknowledged with a receipt.</div>
+          <div class="faq-body hidden px-5 pb-5 text-gray-500 text-sm leading-relaxed">You can donate through our <a href="/donate" class="text-primary font-semibold">Donate page</a>. We accept direct bank transfers and online payments. All donations are acknowledged with a receipt.</div>
         </div>
         <div class="faq-item bg-white rounded-2xl overflow-hidden shadow-sm">
           <button class="faq-btn w-full flex items-center justify-between p-5 text-left font-semibold text-secondary hover:text-primary transition-colors">
             How do I register as a volunteer?
             <i class="fa-solid fa-chevron-down faq-icon transition-transform duration-300"></i>
           </button>
-          <div class="faq-body hidden px-5 pb-5 text-gray-500 text-sm leading-relaxed">Visit our <a href="volunteer.html" class="text-primary font-semibold">Volunteer page</a> and fill out the registration form. Our team will contact you within 48 hours to discuss opportunities.</div>
+          <div class="faq-body hidden px-5 pb-5 text-gray-500 text-sm leading-relaxed">Visit our <a href="/volunteer" class="text-primary font-semibold">Volunteer page</a> and fill out the registration form. Our team will contact you within 48 hours to discuss opportunities.</div>
         </div>
         <div class="faq-item bg-white rounded-2xl overflow-hidden shadow-sm">
           <button class="faq-btn w-full flex items-center justify-between p-5 text-left font-semibold text-secondary hover:text-primary transition-colors">
@@ -186,8 +214,8 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
         <div><div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 flex items-center justify-center"><img class="logo-img w-full h-full object-contain" src="./image/logo.png" alt="logo" /></div><div><span class="block font-bold">Hearts United</span><span class="block text-xs text-light">Nepal Org</span></div></div><p class="text-white/60 text-sm leading-relaxed mb-5">Dedicated to creating a compassionate Nepal through community-driven programs.</p><div class="flex gap-3"><a href="#" class="social-btn bg-blue-600"><i class="fab fa-facebook-f text-sm"></i></a><a href="#" class="social-btn bg-pink-600"><i class="fab fa-instagram text-sm"></i></a><a href="#" class="social-btn bg-red-600"><i class="fab fa-youtube text-sm"></i></a><a href="#" class="social-btn bg-green-600"><i class="fab fa-whatsapp text-sm"></i></a></div></div>
-        <div><h4 class="font-bold text-lg mb-4 text-light">Quick Links</h4><ul class="space-y-2"><li><a href="index.html" class="footer-link">Home</a></li><li><a href="about.html" class="footer-link">About Us</a></li><li><a href="programs.html" class="footer-link">Programs</a></li><li><a href="gallery.html" class="footer-link">Gallery</a></li><li><a href="volunteer.html" class="footer-link">Volunteer</a></li><li><a href="donate.html" class="footer-link">Donate</a></li></ul></div>
-        <div><h4 class="font-bold text-lg mb-4 text-light">Our Programs</h4><ul class="space-y-2"><li><a href="programs.html" class="footer-link">Education Support</a></li><li><a href="programs.html" class="footer-link">Medical Camps</a></li><li><a href="programs.html" class="footer-link">Food & Nutrition</a></li><li><a href="programs.html" class="footer-link">Disaster Relief</a></li><li><a href="programs.html" class="footer-link">Women Empowerment</a></li></ul></div>
+        <div><h4 class="font-bold text-lg mb-4 text-light">Quick Links</h4><ul class="space-y-2"><li><a href="/" class="footer-link">Home</a></li><li><a href="/about" class="footer-link">About Us</a></li><li><a href="/programs" class="footer-link">Programs</a></li><li><a href="/gallery" class="footer-link">Gallery</a></li><li><a href="/volunteer" class="footer-link">Volunteer</a></li><li><a href="/donate" class="footer-link">Donate</a></li></ul></div>
+        <div><h4 class="font-bold text-lg mb-4 text-light">Our Programs</h4><ul class="space-y-2"><li><a href="/programs" class="footer-link">Education Support</a></li><li><a href="/programs" class="footer-link">Medical Camps</a></li><li><a href="/programs" class="footer-link">Food & Nutrition</a></li><li><a href="/programs" class="footer-link">Disaster Relief</a></li><li><a href="/programs" class="footer-link">Women Empowerment</a></li></ul></div>
         <div><h4 class="font-bold text-lg mb-4 text-light">Newsletter</h4><p class="text-white/60 text-sm mb-4">Stay updated with our latest news.</p><form id="newsletterForm" class="flex gap-2"><input type="email" placeholder="Your email" class="flex-1 px-4 py-2.5 rounded-full bg-white/10 border border-white/20 text-white placeholder-white/40 text-sm focus:outline-none focus:border-primary" required /><button type="submit" class="bg-primary hover:bg-red-700 text-white px-4 py-2.5 rounded-full text-sm transition-colors"><i class="fa-solid fa-paper-plane"></i></button></form><div class="mt-6 space-y-2 text-sm text-white/60"><p><i class="fa-solid fa-location-dot text-primary mr-2"></i>Harinagar-7, Ghuski sunsari</p><p><i class="fa-solid fa-phone text-primary mr-2"></i>+977 9819341743</p><p><i class="fa-solid fa-envelope text-primary mr-2"></i>heartsunitednepalorg@gmail.com</p></div></div>
       </div>
       <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-sm text-white/50"><p>&copy; 2025 Hearts United Nepal Org. All rights reserved.</p><p>Made with <i class="fa-solid fa-heart text-primary mx-1"></i> for Nepal</p></div>

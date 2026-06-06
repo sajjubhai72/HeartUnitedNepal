@@ -51,10 +51,14 @@ window.addEventListener('scroll', () => {
 /* ================================================================
    ACTIVE NAV LINK  — highlights current page
    ================================================================ */
-const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+const currentPage = window.location.pathname.replace(/\/$/, '') || '/';
 document.querySelectorAll('.nav-link, .canvas-link').forEach(a => {
   const href = a.getAttribute('href');
-  if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+  // normalize: /about matches /about
+  const pagePath = currentPage === '' ? '/' : currentPage;
+  if (href === pagePath ||
+      (pagePath === '/' && href === '/') ||
+      (pagePath !== '/' && href !== '/' && pagePath.startsWith(href))) {
     a.classList.add('active');
   }
 });

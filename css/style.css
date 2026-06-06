@@ -10,10 +10,11 @@ body { font-family: 'Poppins', sans-serif; }
    LOGO IMAGE — background remove
    ============================================================ */
 .logo-img {
-  mix-blend-mode: multiply;   /* removes white background on light bg */
+  /* mix-blend-mode: multiply; */
   background: transparent;
   display: block;
 }
+
 /* Canvas sidebar has dark bg — use normal blend there */
 .canvas-logo-img {
   background: transparent;

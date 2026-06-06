@@ -1,8 +1,36 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ═══ SEO META TAGS ═══ -->
+  <meta name="description" content="Hearts United Nepal Org is a non-profit dedicated to education, healthcare, food support, and disaster relief across Nepal. Join us to make a difference." />
+  <meta name="keywords"    content="Hearts United Nepal, Nepal NGO, Nepal non-profit, donate Nepal, volunteer Nepal, education Nepal, healthcare Nepal, charity Nepal" />
+  <meta name="author"      content="Hearts United Nepal Org" />
+  <meta name="robots"      content="index, follow" />
+  <link rel="canonical"    href="https://heartsunitednepalorg.com/" />
+
+  <!-- Open Graph (Facebook / Social) -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://heartsunitednepalorg.com/" />
+  <meta property="og:title"       content="Hearts United Nepal Org — Uniting Hearts, Changing Lives" />
+  <meta property="og:description" content="Hearts United Nepal Org is a non-profit dedicated to education, healthcare, food support, and disaster relief across Nepal. Join us to make a difference." />
+  <meta property="og:image"       content="https://heartsunitednepalorg.com/image/logo.png" />
+  <meta property="og:site_name"   content="Hearts United Nepal Org" />
+  <meta property="og:locale"      content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Hearts United Nepal Org — Uniting Hearts, Changing Lives" />
+  <meta name="twitter:description" content="Hearts United Nepal Org is a non-profit dedicated to education, healthcare, food support, and disaster relief across Nepal. Join us to make a difference." />
+  <meta name="twitter:image"       content="https://heartsunitednepalorg.com/image/logo.png" />
+
+  <!-- PWA / App -->
+  <link rel="manifest"     href="/manifest.json" />
+  <meta name="theme-color" content="#e63946" />
+  <link rel="icon"         href="/image/logo.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/image/logo.png" />
+  <!-- ═══════════════════════ -->
   <title>Hearts United Nepal Org — Home</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="css/style.css" />
@@ -16,6 +44,37 @@
       }}
     };
   </script>
+
+  <!-- Structured Data (JSON-LD) for Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "NGO",
+    "name": "Hearts United Nepal Org",
+    "alternateName": "Hearts United Nepal",
+    "url": "https://heartsunitednepalorg.com",
+    "logo": "https://heartsunitednepalorg.com/image/logo.png",
+    "description": "Non-profit organization dedicated to community-driven change through education, healthcare, food support, and humanitarian assistance across Nepal.",
+    "foundingDate": "2016",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Harinagar-7 Ghuski",
+      "addressRegion": "Sunsari",
+      "addressCountry": "NP"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+977-9819341743",
+      "email": "heartsunitednepalorg@gmail.com",
+      "contactType": "customer service"
+    },
+    "sameAs": [
+      "https://www.facebook.com/share/1AAqGFfTQp/"
+    ],
+    "areaServed": "Nepal",
+    "knowsAbout": ["Education", "Healthcare", "Disaster Relief", "Women Empowerment", "Food Support"]
+  }
+  </script>
 </head>
 <body class="font-poppins bg-white text-gray-800 overflow-x-hidden">
 
@@ -24,7 +83,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16 lg:h-20">
         <!-- Logo -->
-        <a href="index.html" class="flex items-center gap-3 group">
+        <a href="/" class="flex items-center gap-3 group">
           <div class="w-10 h-10 lg:w-12 lg:h-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
             <img class="logo-img w-full h-full object-contain" src="./image/logo.png" alt="logo" />
           </div>
@@ -35,16 +94,16 @@
         </a>
         <!-- Desktop links -->
         <ul class="hidden lg:flex items-center gap-1">
-          <li><a href="index.html"     class="nav-link">Home</a></li>
-          <li><a href="about.html"     class="nav-link">About Us</a></li>
-          <li><a href="programs.html"  class="nav-link">Programs</a></li>
-          <li><a href="gallery.html"   class="nav-link">Gallery</a></li>
-          <li><a href="team.html"      class="nav-link">Our Team</a></li>
-          <li><a href="volunteer.html" class="nav-link">Volunteer</a></li>
-          <li><a href="contact.html"   class="nav-link">Contact</a></li>
+          <li><a href="/"     class="nav-link">Home</a></li>
+          <li><a href="/about"     class="nav-link">About Us</a></li>
+          <li><a href="/programs"  class="nav-link">Programs</a></li>
+          <li><a href="/gallery"   class="nav-link">Gallery</a></li>
+          <li><a href="/team"      class="nav-link">Our Team</a></li>
+          <li><a href="/volunteer" class="nav-link">Volunteer</a></li>
+          <li><a href="/contact"   class="nav-link">Contact</a></li>
         </ul>
         <!-- Donate -->
-        <a href="donate.html" class="hidden lg:flex items-center gap-2 bg-primary hover:bg-red-700 text-white font-semibold px-5 py-2.5 rounded-full transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 text-sm">
+        <a href="/donate" class="hidden lg:flex items-center gap-2 bg-primary hover:bg-red-700 text-white font-semibold px-5 py-2.5 rounded-full transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 text-sm">
           <i class="fa-solid fa-heart-pulse text-sm"></i> Donate Now
         </a>
         <!-- Hamburger -->
@@ -71,17 +130,17 @@
     </div>
     <nav class="flex-1 overflow-y-auto py-4 px-4">
       <ul class="space-y-1">
-        <li><a href="index.html"     class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-house w-5"></i> Home</a></li>
-        <li><a href="about.html"     class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-circle-info w-5"></i> About Us</a></li>
-        <li><a href="programs.html"  class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-hands-holding-child w-5"></i> Programs</a></li>
-        <li><a href="gallery.html"   class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-images w-5"></i> Gallery</a></li>
-        <li><a href="team.html"      class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-people-group w-5"></i> Our Team</a></li>
-        <li><a href="volunteer.html" class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-hand-holding-heart w-5"></i> Volunteer</a></li>
-        <li><a href="contact.html"   class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-envelope w-5"></i> Contact</a></li>
+        <li><a href="/"     class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-house w-5"></i> Home</a></li>
+        <li><a href="/about"     class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-circle-info w-5"></i> About Us</a></li>
+        <li><a href="/programs"  class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-hands-holding-child w-5"></i> Programs</a></li>
+        <li><a href="/gallery"   class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-images w-5"></i> Gallery</a></li>
+        <li><a href="/team"      class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-people-group w-5"></i> Our Team</a></li>
+        <li><a href="/volunteer" class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-hand-holding-heart w-5"></i> Volunteer</a></li>
+        <li><a href="/contact"   class="canvas-link" onclick="closeCanvas()"><i class="fa-solid fa-envelope w-5"></i> Contact</a></li>
       </ul>
     </nav>
     <div class="p-4 border-t border-gray-100">
-      <a href="donate.html" onclick="closeCanvas()" class="flex items-center justify-center gap-2 w-full bg-primary hover:bg-red-700 text-white font-semibold py-3 rounded-full transition-all duration-300 shadow-md">
+      <a href="/donate" onclick="closeCanvas()" class="flex items-center justify-center gap-2 w-full bg-primary hover:bg-red-700 text-white font-semibold py-3 rounded-full transition-all duration-300 shadow-md">
         <i class="fa-solid fa-heart-pulse"></i> Donate Now
       </a>
       <div class="flex justify-center gap-3 mt-4">
@@ -114,8 +173,8 @@
         Hearts United Nepal Org is dedicated to building a compassionate community through education, health, and humanitarian support across Nepal.
       </p>
       <div class="flex flex-row sm:flex-row gap-4 justify-center text-sm animate-slide-up-3">
-        <a href="programs.html" class="btn-primary-hero"><i class="fa-solid fa-hands-holding-child"></i> Our Programs</a>
-        <a href="donate.html"   class="btn-outline-hero"><i class="fa-solid fa-heart-pulse"></i> Donate Now</a>
+        <a href="/programs" class="btn-primary-hero"><i class="fa-solid fa-hands-holding-child"></i> Our Programs</a>
+        <a href="/donate"   class="btn-outline-hero"><i class="fa-solid fa-heart-pulse"></i> Donate Now</a>
       </div>
       <!-- Stats -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 max-w-3xl mx-auto animate-fade-in-delay">
@@ -158,7 +217,7 @@
           <p class="text-sm text-gray-500">Disaster relief and emergency humanitarian aid.</p>
         </div>
       </div>
-      <div class="text-center mt-10"><a href="about.html" class="btn-secondary">Learn More About Us <i class="fa-solid fa-arrow-right"></i></a></div>
+      <div class="text-center mt-10"><a href="/about" class="btn-secondary">Learn More About Us <i class="fa-solid fa-arrow-right"></i></a></div>
     </div>
   </section>
 
@@ -175,22 +234,22 @@
           <div class="program-icon bg-red-100 group-hover:bg-primary"><i class="fa-solid fa-graduation-cap text-primary text-2xl group-hover:text-white transition-colors"></i></div>
           <h3 class="text-xl font-bold text-secondary mt-4 mb-2">Education Support</h3>
           <p class="text-gray-500 text-sm leading-relaxed">Scholarships, school supplies, and mentorship for underprivileged children across rural Nepal.</p>
-          <a href="programs.html" class="program-link">Learn More <i class="fa-solid fa-arrow-right text-xs"></i></a>
+          <a href="/programs" class="program-link">Learn More <i class="fa-solid fa-arrow-right text-xs"></i></a>
         </div>
         <div class="program-card group reveal-item">
           <div class="program-icon bg-blue-100 group-hover:bg-secondary"><i class="fa-solid fa-stethoscope text-secondary text-2xl group-hover:text-white transition-colors"></i></div>
           <h3 class="text-xl font-bold text-secondary mt-4 mb-2">Medical Camps</h3>
           <p class="text-gray-500 text-sm leading-relaxed">Free health checkups, medicines, and awareness programs in remote areas with limited access.</p>
-          <a href="programs.html" class="program-link">Learn More <i class="fa-solid fa-arrow-right text-xs"></i></a>
+          <a href="/programs" class="program-link">Learn More <i class="fa-solid fa-arrow-right text-xs"></i></a>
         </div>
         <div class="program-card group reveal-item">
           <div class="program-icon bg-yellow-100 group-hover:bg-yellow-500"><i class="fa-solid fa-house-chimney-crack text-yellow-500 text-2xl group-hover:text-white transition-colors"></i></div>
           <h3 class="text-xl font-bold text-secondary mt-4 mb-2">Disaster Relief</h3>
           <p class="text-gray-500 text-sm leading-relaxed">Immediate emergency support for communities affected by earthquakes, floods, and disasters.</p>
-          <a href="programs.html" class="program-link">Learn More <i class="fa-solid fa-arrow-right text-xs"></i></a>
+          <a href="/programs" class="program-link">Learn More <i class="fa-solid fa-arrow-right text-xs"></i></a>
         </div>
       </div>
-      <div class="text-center mt-10"><a href="programs.html" class="btn-primary">View All Programs <i class="fa-solid fa-arrow-right"></i></a></div>
+      <div class="text-center mt-10"><a href="/programs" class="btn-primary">View All Programs <i class="fa-solid fa-arrow-right"></i></a></div>
     </div>
   </section>
 
@@ -201,8 +260,8 @@
       <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-6">Your Support Changes Lives</h2>
       <p class="text-lg text-white/85 mb-10 max-w-2xl mx-auto">Every rupee donated directly funds our programs and helps us reach more communities across Nepal. Together, we can do more.</p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="donate.html"    class="bg-white text-primary font-bold px-8 py-4 rounded-full hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 inline-flex items-center gap-2"><i class="fa-solid fa-heart-pulse"></i> Donate Now</a>
-        <a href="volunteer.html" class="border-2 border-white text-white font-bold px-8 py-4 rounded-full hover:bg-white hover:text-primary transition-all duration-300 inline-flex items-center gap-2"><i class="fa-solid fa-hand-holding-heart"></i> Volunteer</a>
+        <a href="/donate"    class="bg-white text-primary font-bold px-8 py-4 rounded-full hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 inline-flex items-center gap-2"><i class="fa-solid fa-heart-pulse"></i> Donate Now</a>
+        <a href="/volunteer" class="border-2 border-white text-white font-bold px-8 py-4 rounded-full hover:bg-white hover:text-primary transition-all duration-300 inline-flex items-center gap-2"><i class="fa-solid fa-hand-holding-heart"></i> Volunteer</a>
       </div>
     </div>
   </section>
@@ -216,12 +275,12 @@
         <p class="section-subtitle">A peek into our work and the smiles we've helped create across Nepal.</p>
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <div class="gallery-item reveal-item"><img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=500&q=80" alt="" /><div class="gallery-overlay"><i class="fa-solid fa-expand text-2xl"></i></div></div>
-        <div class="gallery-item reveal-item"><img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=500&q=80" alt="" /><div class="gallery-overlay"><i class="fa-solid fa-expand text-2xl"></i></div></div>
-        <div class="gallery-item reveal-item"><img src="https://images.unsplash.com/photo-1593113630400-ea4288922559?w=500&q=80" alt="" /><div class="gallery-overlay"><i class="fa-solid fa-expand text-2xl"></i></div></div>
-        <div class="gallery-item reveal-item"><img src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=500&q=80" alt="" /><div class="gallery-overlay"><i class="fa-solid fa-expand text-2xl"></i></div></div>
+        <div class="gallery-item reveal-item"><img src="./image/gallery/image-01.png" alt="" /><div class="gallery-overlay"><i class="fa-solid fa-expand text-2xl"></i></div></div>
+        <div class="gallery-item reveal-item"><img src="./image/gallery/image-02.png" alt="" /><div class="gallery-overlay"><i class="fa-solid fa-expand text-2xl"></i></div></div>
+        <div class="gallery-item reveal-item"><img src="./image/gallery/image-03.png" alt="" /><div class="gallery-overlay"><i class="fa-solid fa-expand text-2xl"></i></div></div>
+        <div class="gallery-item reveal-item"><img src="./image/gallery/image-04.png" alt="" /><div class="gallery-overlay"><i class="fa-solid fa-expand text-2xl"></i></div></div>
       </div>
-      <div class="text-center mt-10"><a href="gallery.html" class="btn-outline">View Full Gallery <i class="fa-solid fa-images"></i></a></div>
+      <div class="text-center mt-10"><a href="/gallery" class="btn-outline">View Full Gallery <i class="fa-solid fa-images"></i></a></div>
     </div>
   </section>
 
@@ -231,8 +290,13 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
         <div>
           <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center"><i class="fa-solid fa-heart text-white"></i></div>
-            <div><span class="block font-bold text-lg">Hearts United</span><span class="block text-xs text-light">Nepal Org</span></div>
+            <div class="w-10 h-10 flex items-center justify-center">
+              <img class="logo-img w-full h-full object-contain bg-white" src="./image/logo.png" alt="logo" />
+            </div>
+            <div>
+              <span class="block font-bold text-lg">Hearts United</span>
+              <span class="block text-xs text-light">Nepal Org</span>
+            </div>
           </div>
           <p class="text-white/60 text-sm leading-relaxed mb-5">Dedicated to creating a compassionate Nepal through community-driven programs since 2016.</p>
           <div class="flex gap-3">
@@ -245,23 +309,22 @@
         <div>
           <h4 class="font-bold text-lg mb-4 text-light">Quick Links</h4>
           <ul class="space-y-2">
-            <li><a href="index.html"     class="footer-link">Home</a></li>
-            <li><a href="about.html"     class="footer-link">About Us</a></li>
-            <li><a href="programs.html"  class="footer-link">Programs</a></li>
-            <li><a href="gallery.html"   class="footer-link">Gallery</a></li>
-            <li><a href="volunteer.html" class="footer-link">Volunteer</a></li>
-            <li><a href="donate.html"    class="footer-link">Donate</a></li>
+            <li><a href="/"     class="footer-link">Home</a></li>
+            <li><a href="/about"     class="footer-link">About Us</a></li>
+            <li><a href="/programs"  class="footer-link">Programs</a></li>
+            <li><a href="/gallery"   class="footer-link">Gallery</a></li>
+            <li><a href="/volunteer" class="footer-link">Volunteer</a></li>
+            <li><a href="/donate"    class="footer-link">Donate</a></li>
           </ul>
         </div>
         <div>
           <h4 class="font-bold text-lg mb-4 text-light">Our Programs</h4>
           <ul class="space-y-2">
-            <li><a href="programs.html" class="footer-link">Education Support</a></li>
-            <li><a href="programs.html" class="footer-link">Medical Camps</a></li>
-            <li><a href="programs.html" class="footer-link">Food & Nutrition</a></li>
-            <li><a href="programs.html" class="footer-link">Disaster Relief</a></li>
-            <li><a href="programs.html" class="footer-link">Women Empowerment</a></li>
-            <li><a href="programs.html" class="footer-link">Environment</a></li>
+            <li><a href="/programs" class="footer-link">Education Support</a></li>
+            <li><a href="/programs" class="footer-link">Medical Camps</a></li>
+            <li><a href="/programs" class="footer-link">Food & Nutrition</a></li>
+            <li><a href="/programs" class="footer-link">Disaster Relief</a></li>
+            <li><a href="/programs" class="footer-link">Women Empowerment</a></li>
           </ul>
         </div>
         <div>
