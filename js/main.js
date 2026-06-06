@@ -54,7 +54,6 @@ window.addEventListener('scroll', () => {
 const currentPage = window.location.pathname.replace(/\/$/, '') || '/';
 document.querySelectorAll('.nav-link, .canvas-link').forEach(a => {
   const href = a.getAttribute('href');
-  // normalize: /about matches /about
   const pagePath = currentPage === '' ? '/' : currentPage;
   if (href === pagePath ||
       (pagePath === '/' && href === '/') ||
@@ -62,6 +61,27 @@ document.querySelectorAll('.nav-link, .canvas-link').forEach(a => {
     a.classList.add('active');
   }
 });
+
+/* ================================================================
+   SMART LINKS — local dev uses .html, production uses clean URLs
+   ================================================================ */
+(function() {
+  const isLocal = location.hostname === '127.0.0.1' ||
+                  location.hostname === 'localhost' ||
+                  location.protocol === 'file:';
+  if (!isLocal) return; // production: clean URLs already work
+
+  // On local: rewrite clean href links to .html versions
+  document.querySelectorAll('a[href]').forEach(a => {
+    const href = a.getAttribute('href');
+    // match /about /programs /gallery /team /volunteer /donate /contact
+    if (/^\/(about|programs|gallery|team|volunteer|donate|contact)$/.test(href)) {
+      a.setAttribute('href', href.slice(1) + '.html');
+    } else if (href === '/') {
+      a.setAttribute('href', 'index.html');
+    }
+  });
+})();
 
 /* ================================================================
    SCROLL-TO-TOP
