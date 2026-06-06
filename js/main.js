@@ -87,8 +87,11 @@ document.querySelectorAll('.nav-link, .canvas-link').forEach(a => {
 })();
 
 /* ================================================================
-   SCROLL-TO-TOP
+   AUTO COPYRIGHT YEAR
    ================================================================ */
+document.querySelectorAll('.copyright-year').forEach(el => {
+  el.textContent = new Date().getFullYear();
+});
 scrollTopBtn?.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
 
 /* ================================================================
