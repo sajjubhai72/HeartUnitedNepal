@@ -446,21 +446,25 @@
           <div class="relative inline-block">
             <div class="qr-ring"></div>
             <div class="bg-white border-2 border-gray-100 rounded-2xl p-3 shadow-lg">
-              <!-- QR rendered here by qrcodejs library -->
-              <div id="qrDiv" style="width:200px;height:200px;display:flex;align-items:center;justify-content:center;"></div>
+              <!-- ★ Replace ./image/payment-qr.png with your real QR image ★ -->
+              <img id="qrImg"
+                src="./image/payment-qr.png"
+                alt="Scan to Pay — Hearts United Nepal"
+                width="200" height="200"
+                style="display:block;border-radius:.5rem;object-fit:contain;"
+                onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=Pay+to+Hearts+United+Nepal+9819341743'"
+              />
             </div>
           </div>
           <p class="text-xs text-gray-400 mt-3 text-center">Scan with eSewa / Khalti / any Nepal banking app</p>
-          <!-- QR amount label -->
-          <div class="mt-3 bg-gray-50 rounded-xl px-4 py-2 text-center">
+          <div class="mt-3 bg-gray-50 rounded-xl px-4 py-2 text-center w-full">
             <p class="text-xs text-gray-400">Amount to pay</p>
             <p id="qrAmtLabel" class="text-xl font-extrabold text-secondary">Rs 500</p>
           </div>
-          <!-- Download QR button -->
-          <button id="downloadQR" onclick="downloadQR()"
-            class="mt-3 text-xs text-primary hover:text-red-700 flex items-center gap-1.5 font-semibold transition-colors cursor-pointer">
+          <a href="./image/payment-qr.png" download="hearts-united-payment-qr.png"
+            class="mt-3 text-xs text-primary hover:text-red-700 flex items-center gap-1.5 font-semibold transition-colors">
             <i class="fa-solid fa-download"></i> Download QR
-          </button>
+          </a>
         </div>
 
         <!-- RIGHT: eSewa & Khalti -->
@@ -551,11 +555,8 @@
     khalti_id : '9819341743',
     org_name  : 'Hearts United Nepal Org'
   };
-
   let selectedAmount = 500;
-  let qrInstance     = null;   // holds QRCode object so we can clear & redraw
 
-  /* ── amount helpers ── */
   function getAmount() {
     const a = document.querySelector('.donate-amt.active');
     if (!a) return 500;
@@ -567,7 +568,6 @@
   }
   function fmtNPR(n) { return 'Rs ' + Number(n).toLocaleString('en-IN'); }
 
-  /* amount buttons */
   document.querySelectorAll('.donate-amt').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.donate-amt').forEach(b => b.classList.remove('active'));
@@ -580,57 +580,12 @@
   });
   document.getElementById('customAmt')?.addEventListener('input', () => { selectedAmount = getAmount(); });
 
-  /* ── proceed button ── */
   function handleProceed() {
     const amt = getAmount();
     if (!amt || amt < 1) { showPayToast('Please select or enter a valid amount.', 'error'); return; }
     openPaymentModal(amt, document.getElementById('donorPurpose')?.value || 'General Fund');
   }
 
-  /* ── draw QR using qrcodejs (loaded in <head>) ── */
-  function drawQR(amount) {
-    const div = document.getElementById('qrDiv');
-    if (!div) return;
-
-    /* clear previous */
-    div.innerHTML = '';
-    qrInstance = null;
-
-    if (typeof QRCode === 'undefined') {
-      div.innerHTML = '<p style="font-size:.8rem;color:#6b7280;text-align:center;padding:1rem;">eSewa / Khalti<br><strong>' + CFG.esewa_id + '</strong><br>Rs ' + amount + '</p>';
-      return;
-    }
-
-    /* eSewa deep-link — scanning opens eSewa with amount prefilled */
-    const data =
-      'esewa://p2p?amount=' + amount +
-      '&to=' + CFG.esewa_id +
-      '&remarks=Donation+to+Hearts+United+Nepal';
-
-    qrInstance = new QRCode(div, {
-      text          : data,
-      width         : 200,
-      height        : 200,
-      colorDark     : '#000000',
-      colorLight    : '#ffffff',
-      correctLevel  : QRCode.CorrectLevel.M
-    });
-  }
-
-  /* ── download QR ── */
-  function downloadQR() {
-    const canvas = document.querySelector('#qrDiv canvas');
-    const img    = document.querySelector('#qrDiv img');
-    let src = null;
-    if (canvas) src = canvas.toDataURL('image/png');
-    else if (img) src = img.src;
-    if (!src) { showPayToast('QR not ready yet.', 'error'); return; }
-    const a = document.createElement('a');
-    a.href = src; a.download = 'donation-qr-rs' + selectedAmount + '.png';
-    a.click();
-  }
-
-  /* ── modal ── */
   function openPaymentModal(amount, purpose) {
     selectedAmount = amount;
     const s = fmtNPR(amount);
@@ -639,11 +594,8 @@
     document.getElementById('qrAmtLabel').textContent   = s;
     document.getElementById('esewaAmtBtn').textContent  = '(' + s + ')';
     document.getElementById('khaltiAmtBtn').textContent = '(' + s + ')';
-
-    /* show modal first so div has dimensions, then draw QR */
     document.getElementById('paymentModal').classList.add('open');
     document.body.style.overflow = 'hidden';
-    setTimeout(() => drawQR(amount), 50);   /* tiny delay ensures div is visible */
   }
 
   function closePaymentModal() {
@@ -657,50 +609,22 @@
   });
   document.getElementById('doneBtn')?.addEventListener('click', () => {
     closePaymentModal();
-    showPayToast('Thank you for your generous donation! Heart');
+    showPayToast('Thank you for your generous donation! ❤️');
     document.getElementById('donateForm')?.reset();
     document.querySelectorAll('.donate-amt').forEach((b,i) => b.classList.toggle('active', i===0));
     document.getElementById('customAmtWrap')?.classList.add('hidden');
     selectedAmount = 500;
   });
 
-  /* ── eSewa ── */
   function openESewa() {
-    window.open(
-      'https://esewa.com.np/#/pay?pa=' + CFG.esewa_id +
-      '&pn=' + encodeURIComponent(CFG.org_name) +
-      '&am=' + selectedAmount +
-      '&pid=HUN-' + Date.now(),
-      '_blank', 'noopener'
-    );
+    window.open('https://esewa.com.np/#/pay?pa=' + CFG.esewa_id + '&pn=' + encodeURIComponent(CFG.org_name) + '&am=' + selectedAmount, '_blank', 'noopener');
   }
-
-  /* ── Khalti ── */
   function openKhalti() {
-    window.open(
-      'https://khalti.com/#/pay?mobile=' + CFG.khalti_id +
-      '&amount=' + (selectedAmount * 100) +
-      '&product_name=' + encodeURIComponent('Donation-' + CFG.org_name),
-      '_blank', 'noopener'
-    );
+    window.open('https://khalti.com/#/pay?mobile=' + CFG.khalti_id + '&amount=' + (selectedAmount*100) + '&product_name=' + encodeURIComponent('Donation-'+CFG.org_name), '_blank', 'noopener');
   }
-
-  /* ── copy ── */
   function copyText(text, type) {
-    const label = type === 'esewa' ? 'eSewa' : 'Khalti';
-    if (navigator.clipboard?.writeText) {
-      navigator.clipboard.writeText(text).then(() => showPayToast(label + ' ID copied!')).catch(() => fbCopy(text, label));
-    } else { fbCopy(text, label); }
+    navigator.clipboard?.writeText(text).then(() => showPayToast((type==='esewa'?'eSewa':'Khalti')+' ID copied!'));
   }
-  function fbCopy(text, label) {
-    const el = document.createElement('textarea');
-    el.value = text; el.style.cssText = 'position:fixed;opacity:0;';
-    document.body.appendChild(el); el.select();
-    try { document.execCommand('copy'); showPayToast(label + ' ID copied!'); } catch(e){}
-    document.body.removeChild(el);
-  }
-
-  /* ── toast ── */
   function showPayToast(msg, type) {
     document.querySelectorAll('.pay-toast').forEach(el => el.remove());
     const t = document.createElement('div');
@@ -709,10 +633,7 @@
     document.body.appendChild(t);
     setTimeout(() => { t.style.transition='opacity .3s'; t.style.opacity='0'; setTimeout(()=>t.remove(),350); }, 3000);
   }
-
-  document.getElementById('newsletterForm')?.addEventListener('submit', e => {
-    e.preventDefault(); showPayToast('Subscribed to newsletter!'); e.target.reset();
-  });
+  document.getElementById('newsletterForm')?.addEventListener('submit', e => { e.preventDefault(); showPayToast('Subscribed!'); e.target.reset(); });
   </script>
 </body>
 </html>
