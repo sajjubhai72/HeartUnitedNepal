@@ -66,19 +66,22 @@ document.querySelectorAll('.nav-link, .canvas-link').forEach(a => {
    SMART LINKS — local dev uses .html, production uses clean URLs
    ================================================================ */
 (function() {
-  const isLocal = location.hostname === '127.0.0.1' ||
-                  location.hostname === 'localhost' ||
-                  location.protocol === 'file:';
-  if (!isLocal) return; // production: clean URLs already work
+  var hostname = location.hostname;
+  var isLocal  = hostname === '127.0.0.1' || hostname === 'localhost' || location.protocol === 'file:';
+  // GitHub Pages: username.github.io (not custom domain)
+  var isGHPages = hostname.endsWith('github.io');
 
-  // On local: rewrite clean href links to .html versions
-  document.querySelectorAll('a[href]').forEach(a => {
-    const href = a.getAttribute('href');
-    // match /about /programs /gallery /team /volunteer /donate /contact
-    if (/^\/(about|programs|gallery|team|volunteer|donate|contact)$/.test(href)) {
-      a.setAttribute('href', href.slice(1) + '.html');
+  if (!isLocal && !isGHPages) return; // Netlify/Vercel: clean URLs work natively
+
+  document.querySelectorAll('a[href]').forEach(function(a) {
+    var href = a.getAttribute('href');
+    // rewrite /about → about.html  (or /RepoName/about → /RepoName/about.html)
+    var match = href.match(/^(.*?)\/(about|programs|gallery|team|volunteer|donate|contact)$/);
+    if (match) {
+      a.setAttribute('href', match[1] + '/' + match[2] + '.html');
     } else if (href === '/') {
-      a.setAttribute('href', 'index.html');
+      // root → index.html (for local) or keep / for GH Pages
+      if (isLocal) a.setAttribute('href', 'index.html');
     }
   });
 })();

@@ -1,21 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Page Not Found — Hearts United Nepal Org</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hearts United Nepal Org</title>
+  <!-- GitHub Pages SPA redirect trick -->
+  <script>
+    // When GitHub Pages serves 404, this script checks if the path
+    // matches one of our pages and redirects with .html extension
+    (function() {
+      var path = window.location.pathname;
+      var search = window.location.search;
+      var hash = window.location.hash;
+
+      // Map of clean URLs to .html files
+      var routes = {
+        '/about':     '/about.html',
+        '/programs':  '/programs.html',
+        '/gallery':   '/gallery.html',
+        '/team':      '/team.html',
+        '/volunteer': '/volunteer.html',
+        '/donate':    '/donate.html',
+        '/contact':   '/contact.html'
+      };
+
+      // Check for repo subdirectory (e.g. /HeartUnitedNepal/about)
+      var repoName = '';
+      var pathParts = path.split('/');
+
+      // Try exact match first
+      var cleanPath = path.replace(/\/$/, '');
+      var target = routes[cleanPath];
+
+      if (!target) {
+        // Try with repo prefix stripped
+        for (var route in routes) {
+          if (cleanPath.endsWith(route)) {
+            repoName = cleanPath.replace(route, '');
+            target = repoName + routes[route];
+            break;
+          }
+        }
+      }
+
+      if (target) {
+        // Redirect to .html version
+        window.location.replace(target + search + hash);
+      } else {
+        // True 404 — show error page content
+        document.getElementById('notFound').style.display = 'flex';
+      }
+    })();
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <script>tailwind.config={theme:{extend:{colors:{primary:'#e63946',secondary:'#1d3557'},fontFamily:{poppins:['Poppins','sans-serif']}}}}</script>
 </head>
-<body class="font-poppins bg-gradient-to-br from-secondary to-blue-900 min-h-screen flex items-center justify-center text-white px-4">
-  <div class="text-center max-w-lg">
-    <div class="text-8xl font-extrabold text-primary mb-4">404</div>
-    <h1 class="text-3xl font-bold mb-3">Page Not Found</h1>
-    <p class="text-white/70 mb-8">The page you're looking for doesn't exist or has been moved.</p>
-    <a href="/" class="inline-flex items-center gap-2 bg-primary hover:bg-red-700 text-white font-semibold px-8 py-3 rounded-full transition-all shadow-lg">
-      <i class="fa-solid fa-house"></i> Back to Home
-    </a>
+<body class="font-poppins">
+  <!-- Hidden by default, shown only for true 404s -->
+  <div id="notFound" style="display:none"
+    class="bg-gradient-to-br from-secondary to-blue-900 min-h-screen flex items-center justify-center text-white px-4">
+    <div class="text-center max-w-lg">
+      <div class="text-8xl font-extrabold text-primary mb-4">404</div>
+      <h1 class="text-3xl font-bold mb-3">Page Not Found</h1>
+      <p class="text-white/70 mb-8">The page you're looking for doesn't exist or has been moved.</p>
+      <a href="/" class="inline-flex items-center gap-2 bg-primary hover:bg-red-700 text-white font-semibold px-8 py-3 rounded-full transition-all shadow-lg">
+        <i class="fa-solid fa-house"></i> Back to Home
+      </a>
+    </div>
   </div>
 </body>
 </html>
